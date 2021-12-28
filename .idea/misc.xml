@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/edit_text_round_bg_outline.xml" value="0.2203125" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_chevron_right_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_location.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_locations.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/selector_color.xml" value="0.2203125" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/bottom_layout.xml" value="0.1" />
       </map>
     </option>
   </component>
