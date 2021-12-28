@@ -27,10 +27,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class MapsActivity extends AppCompatActivity {
+
     //Initialise variables
-    Button btnLocation;
+   // Button btnLocation;
     public ActivityMapsBinding binding;
-    TextView textView1, textView2, textView3, textView4, textView5;
+   // TextView textView1, textView2, textView3, textView4, textView5;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
