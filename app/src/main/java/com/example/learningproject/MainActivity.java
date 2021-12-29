@@ -27,7 +27,7 @@ String token;
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
 
         FirebaseMessaging.getInstance().subscribeToTopic("all");
-        FirebaseInstanceId.getInstance().getInstanceId().
+     /*   FirebaseInstanceId.getInstance().getInstanceId().
                 addOnCompleteListener(new OnCompleteListener<Result>() {
                     @Override
                     public void onComplete(@NonNull Task<Result> task) {
@@ -38,7 +38,7 @@ String token;
 
                         }
                     }
-                });
+                });*/
 
       binding.sendNotification.setOnClickListener(new View.OnClickListener() {
          @Override
@@ -46,10 +46,10 @@ String token;
   if(!binding.title.getText().toString().isEmpty() &&
        !binding.message.getText().toString().isEmpty())
   {
-     FcmNotificationSender notificationSender=new FcmNotificationSender(
+   /*  FcmNotificationSender notificationSender=new FcmNotificationSender(
              "/topics/all",binding.title.getText().toString(),
              binding.message.getText().toString(),getApplicationContext(),MainActivity.this);
-     notificationSender.SendNotifications();
+     notificationSender.SendNotifications();*/
   }
   else
   {
@@ -66,9 +66,9 @@ String token;
             !binding.message.getText().toString().isEmpty() && !binding.userToken.getText().toString().isEmpty())
              {
 
-                 FcmNotificationSender notificationSender = new FcmNotificationSender(binding.userToken.getText().toString(),binding.title.getText().toString(),
+               /*  FcmNotificationSender notificationSender = new FcmNotificationSender(binding.userToken.getText().toString(),binding.title.getText().toString(),
                          binding.message.getText().toString(),getApplicationContext(),MainActivity.this);
-                 notificationSender.SendNotifications();
+                 notificationSender.SendNotifications();*/
              }
              else
              {
