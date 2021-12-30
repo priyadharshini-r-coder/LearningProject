@@ -17,4 +17,17 @@
     <color name="grey_90">#263238</color>
     <color name="grey_95">#1a1a1a</color>
     <color name="grey_100_">#0d0d0d</color>
+    <color name="colorPrimary">#1565c0</color>
+    <color name="colorPrimaryDark">#003c8f</color>
+    <color name="colorAccent">#5e92f3</color>
+
+    <color name="rippleEfectColor">#000</color>
+    <color name="btnSignIn">#4a86ff</color>
+    <color name="btnLogIn">#fff</color>
+    <color name="btnDeclinePickup">#ba0000</color>
+
+    <color name="colorFont">#4a4a4a</color>
+    <color name="colorRed">#d9534f</color>
+
+
 </resources>

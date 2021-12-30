@@ -11,7 +11,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.learningproject.R;
 import com.example.learningproject.activities.LocationServiceActivity;
-import com.example.learningproject.model.LocationModel;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
