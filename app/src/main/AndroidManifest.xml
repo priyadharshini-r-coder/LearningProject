@@ -26,6 +26,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".entireactivity.MyLocation.MyMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".entireactivity.MyLocation.MyLoginCheck"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LaunchActivityOne"
+            android:exported="false" />
+        <activity
             android:name=".activities.LocationTracking"
             android:exported="false" />
         <!--
@@ -62,7 +71,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".activities.LaunchActivityOne"
+            android:name=".entireactivity.EnitreMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
