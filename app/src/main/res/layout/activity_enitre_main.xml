@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".entireactivity.EnitreMainActivity">
+        tools:context=".entireactivity.EntireMainActivity">
 
         <Button
             android:id="@+id/btnCustomer"
@@ -18,5 +18,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnDriver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I'm a driver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCustomer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

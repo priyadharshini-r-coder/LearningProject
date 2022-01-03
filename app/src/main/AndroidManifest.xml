@@ -25,6 +25,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
+        <activity android:name=".entireactivity.OtherLocation.DriverAuthActivity"/>
+        <activity android:name=".entireactivity.OtherLocation.DriverMapActivity"/>
         <activity
             android:name=".entireactivity.MyLocation.MyMapActivity"
             android:exported="false" />
@@ -71,7 +73,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".entireactivity.EnitreMainActivity"
+            android:name=".entireactivity.EntireMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

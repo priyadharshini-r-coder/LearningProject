@@ -1,23 +1,25 @@
-package com.example.learningproject.entireactivity.MyLocation;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+package com.example.learningproject.entireactivity.OtherLocation;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.learningproject.MainActivity;
 import com.example.learningproject.R;
-import com.example.learningproject.entireactivity.EntireMainActivity;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -29,24 +31,19 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Objects;
-
-public class MyMapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class DriverMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
-    private LatLng pickupLocation;
     LocationRequest mLocationRequest;
     FusedLocationProviderClient mFusedLocation;
 
-    private Button mLogout, mRequest;
+    private Button mLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,29 +58,19 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         mLogout = findViewById(R.id.btnLogout);
-        mLogout.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(MyMapActivity.this, EntireMainActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        mRequest = findViewById(R.id.btnRequest);
-        mRequest.setOnClickListener(view -> {
-            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("customerRequest");
-            GeoFire geoFire = new GeoFire(ref);
-            geoFire.setLocation(userId, new GeoLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
-
-            pickupLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(pickupLocation).title("Pickup here"));
-
-            mRequest.setText("Getting your driver ready");
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(DriverMapActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
     }
 
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         mLocationRequest = new LocationRequest();
@@ -103,8 +90,8 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
                 // onLocationChanged
-                String user_id = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("My Location");
+                String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
                 GeoFire geoFire = new GeoFire(ref);
                 geoFire.setLocation(user_id, new GeoLocation(location.getLatitude(), location.getLongitude()));
             }
@@ -117,14 +104,19 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                 new AlertDialog.Builder(this)
                         .setTitle("Need permission")
                         .setMessage("Please grant permission.")
-                        .setPositiveButton("OK", (dialogInterface, i) -> ActivityCompat.requestPermissions(MyMapActivity.this, new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION
-                        }, 1))
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(DriverMapActivity.this, new String[]{
+                                        Manifest.permission.ACCESS_FINE_LOCATION
+                                }, 1);
+                            }
+                        })
                         .create()
                         .show();
             }
             else {
-                ActivityCompat.requestPermissions(MyMapActivity.this, new String[]{
+                ActivityCompat.requestPermissions(DriverMapActivity.this, new String[]{
                         Manifest.permission.ACCESS_FINE_LOCATION
                 }, 1);
             }
@@ -134,21 +126,27 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
-                    mMap.setMyLocationEnabled(true);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                        mMap.setMyLocationEnabled(true);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please provide the permission", Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(getApplicationContext(), "Please provide the permission", Toast.LENGTH_LONG).show();
-            }
+                break;
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.removeLocation(user_id);
     }
 
     private void connectDriver() {
