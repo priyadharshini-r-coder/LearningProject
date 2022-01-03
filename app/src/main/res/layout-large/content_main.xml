@@ -130,7 +130,7 @@
                                     android:paddingBottom="5dp"
                                     android:paddingLeft="@dimen/button_padding1"
                                     android:paddingTop="5dp"
-                                    android:text="Cyberia Smart Homes, block A3"
+                                    android:text="TamilNadu"
 
                                     android:textAllCaps="false"
                                     android:textColor="@color/colorFont"
