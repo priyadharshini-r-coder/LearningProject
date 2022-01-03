@@ -100,4 +100,5 @@
     <dimen name="nml_dv_txt">16sp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="cardview_elevation">2dp</dimen>
+    <string name="title_activity_location_tracking">LocationTracking</string>
 </resources>

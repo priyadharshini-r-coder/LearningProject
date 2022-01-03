@@ -44,6 +44,7 @@ import android.widget.Toast;
 import com.example.learningproject.MainActivity;
 import com.example.learningproject.R;
 
+import com.example.learningproject.model.Places;
 import com.example.learningproject.view.LocationModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -55,9 +56,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.location.places.Place;
+/*import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.Places;*/
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -355,8 +356,8 @@ public class LocationServiceActivity  extends FragmentActivity  implements Navig
                             .addConnectionCallbacks( this )
                             .addOnConnectionFailedListener( this )
                             .addApi( LocationServices.API )
-                            .addApi( Places.GEO_DATA_API )
-                            .addApi( Places.PLACE_DETECTION_API )
+                           // .addApi( Places.GEO_DATA_API )
+                           // .addApi( Places.PLACE_DETECTION_API )
                             .build();
                     //mGoogleApiClient = new GoogleApiClient.Builder(this);
                 }
@@ -581,7 +582,7 @@ public class LocationServiceActivity  extends FragmentActivity  implements Navig
             }
 
 
-            public void getLatLang(String placeId) {
+          /*  public void getLatLang(String placeId) {
                 Places.GeoDataApi.getPlaceById( googleApiClient, placeId )
                         .setResultCallback( new ResultCallback<PlaceBuffer>() {
                             @Override
@@ -612,7 +613,7 @@ public class LocationServiceActivity  extends FragmentActivity  implements Navig
                             }
                         } );
             }
-
+*/
 
             @Override
             public void onConnected(@Nullable Bundle bundle) {

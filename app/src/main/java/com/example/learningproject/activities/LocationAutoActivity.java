@@ -13,13 +13,12 @@ import com.example.learningproject.R;
 import com.example.learningproject.adapter.PlacesAdapter;
 import com.example.learningproject.model.Places;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationAutoActivity extends AppCompatActivity implements PlaceSelectionListener {
+public class LocationAutoActivity extends AppCompatActivity {
 
 
     private List<Places> myPlacesList=new ArrayList<>( );
@@ -105,7 +104,7 @@ public class LocationAutoActivity extends AppCompatActivity implements PlaceSele
 
     }
 
-
+/*
     @Override
     public void onPlaceSelected(Place place) {
 
@@ -115,7 +114,7 @@ public class LocationAutoActivity extends AppCompatActivity implements PlaceSele
     @Override
     public void onError(Status status) {
 
-    }
+    }*/
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
