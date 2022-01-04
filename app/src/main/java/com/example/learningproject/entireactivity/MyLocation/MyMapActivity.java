@@ -33,9 +33,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,6 +62,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,6 +94,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     GeoFire geoFire;
 
     Marker mCurrent;
+
 
     SupportMapFragment mapFragment;
 
@@ -174,7 +179,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      binding=DataBindingUtil.setContentView(this,R.layout.activity_my_map);
+       binding=DataBindingUtil.setContentView(this,R.layout.activity_my_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -183,54 +188,81 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         // init view
 
 
-       binding.switchON.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-           @Override
-           public void onCheckedChanged(CompoundButton compoundButton, boolean isOnline) {
-               if(isOnline)
-               {
-                   startLocationUpdates();
-                   displayLocation();
-                   Snackbar.make(mapFragment.getView(), "You are online",Snackbar.LENGTH_SHORT).show();
-               }
-               else
-               {
-                   stopLocationUpdates();
-                   mCurrent.remove();
-                   mMap.clear();
-                   handler.removeCallbacks(drawPathRunnable);
-                   Snackbar.make(mapFragment.getView(), "You are offline",Snackbar.LENGTH_SHORT).show();
-               }
-           }
+      binding.locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isOnline) {
+                if(isOnline)
+                {
+                    startLocationUpdates();
+                    displayLocation();
+                    Snackbar.make(mapFragment.getView(), "You are online",Snackbar.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    stopLocationUpdates();
+                    mCurrent.remove();
+                    mMap.clear();
+//                    handler.removeCallbacks(drawPathRunnable);
+                    Snackbar.make(mapFragment.getView(), "You are offline",Snackbar.LENGTH_SHORT).show();
+                }
+            }
 
         });
-
+        binding.LogoutButton.setOnClickListener(view -> {
+            stopLocationUpdates();
+            //mCurrent.remove();
+         //  mMap.clear();
+               FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(MyMapActivity.this, EntireMainActivity.class);
+            startActivity(intent);
+            finish();
+        });
         polyLineList = new ArrayList<>();
+       /*  binding.btnGo.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if(binding.locationSwitch.isChecked())
+                 {
+                     destination = binding.edtPlace.getText().toString();
+                     destination = destination.replace(" ", "+");
 
-        binding.logout.setOnClickListener(new View.OnClickListener() {
+                     getDirection();
+                 }
+                 else
+                 {
+                     Toast.makeText(MyMapActivity.this,"Please change your status to online", Toast.LENGTH_SHORT).show();
+                 }
+             }
+         });*/
+
+
+       places = (SupportPlaceAutocompleteFragment)getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onClick(View view) {
-                stopLocationUpdates();
-                mCurrent.remove();
-                mMap.clear();
-                handler.removeCallbacks(drawPathRunnable);
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MyMapActivity.this, EntireMainActivity.class);
-                startActivity(intent);
-                finish();
+            public void onPlaceSelected(Place place)
+            {
+                if(binding.locationSwitch.isChecked())
+                {
+                    destination = place.getAddress().toString();
+                    destination = destination.replace(" ", "+");
+
+                    getDirection();
+                }
+                else
+                {
+                    Toast.makeText(MyMapActivity.this,"Please change your status to online", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Status status) {
+                Toast.makeText(MyMapActivity.this, ""+status.toString(),Toast.LENGTH_SHORT).show();
             }
         });
 
-         binding.Golocation.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-               destination=binding.editPlace.getText().toString();
-               destination=destination.replace("","+");
-               getDirection();
-             }
-         });
 
         // Geo Fire
-        drivers = FirebaseDatabase.getInstance().getReference("Users").child("Customers").child("Locations");
+        drivers = FirebaseDatabase.getInstance().getReference("Users").child("Customers").child("Users Location");
         geoFire = new GeoFire(drivers);
 
         setUpLocation();
@@ -242,7 +274,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     {
         currentPosition = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-        String requestApi = null;
+        String requestApi;
 
         try
         {
@@ -259,11 +291,10 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                         @Override
                         public void onFailure(Request request, IOException e) {
                             Toast.makeText(MyMapActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
-
                         }
 
                         @Override
-                        public void onResponse(com.squareup.okhttp.Response response) throws IOException {
+                        public void onResponse(Response response) throws IOException {
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response.body().toString());
@@ -391,17 +422,18 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (checkPlayServices()) {
-                    buildGoogleApiClient();
-                    createLocationRequest();
+        switch (requestCode) {
+            case MY_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (checkPlayServices()) {
+                        buildGoogleApiClient();
+                        createLocationRequest();
 
-                    if (binding.switchON.isChecked()) {
-                        displayLocation();
+                        if (binding.locationSwitch.isChecked()) {
+                            displayLocation();
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -424,7 +456,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                 buildGoogleApiClient();
                 createLocationRequest();
 
-                if(binding.switchON.isChecked())
+                if(binding.locationSwitch.isChecked())
                 {
                     displayLocation();
                 }
@@ -490,7 +522,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
 
         if(mLastLocation != null)
         {
-            if(binding.switchON.isChecked())
+            if(binding.locationSwitch.isChecked())
             {
                 final double latitude = mLastLocation.getLatitude();
                 final double longitude = mLastLocation.getLongitude();

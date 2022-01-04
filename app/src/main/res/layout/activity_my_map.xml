@@ -9,103 +9,101 @@
         android:layout_height="match_parent"
         tools:context=".entireactivity.MyLocation.MyMapActivity">
 
-
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/Logout_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/layout_panel"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.949"
+            app:layout_constraintHorizontal_bias="0.826"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintVertical_bias="0.421" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/layout_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="30dp"
-            android:background="@color/grey_10"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.48"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintBottom_toTopOf="@+id/map"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="0dp">
 
-            <EditText
-                android:id="@+id/editPlace"
-                android:layout_width="wrap_content"
+<!--            <EditText-->
+<!--                android:id="@+id/edtPlace"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:hint="Enter PickUp Location" />-->
+            <fragment
+                android:id="@+id/place_autocomplete_fragment"
+                android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Destination"
-                tools:layout_editor_absoluteX="21dp"
-                tools:layout_editor_absoluteY="133dp" />
+                android:layout_margin="0dp"
+                android:layout_weight="5"
+                app:layout_constraintBottom_toTopOf="@+id/map"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/Golocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Go"
-                tools:layout_editor_absoluteX="246dp"
-                tools:layout_editor_absoluteY="128dp" />
-
-
+<!--            <Button-->
+<!--                android:id="@+id/btnGo"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="GO" />-->
         </LinearLayout>
 
         <fragment
-            android:id="@+id/mapView"
+            android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_marginStart="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.062"
-            tools:context=".entireactivity.MyLocation.MyMapActivity" />
+            android:layout_below="@+id/layout_panel"
+            app:layout_constraintBottom_toTopOf="@+id/cardView2"
+            tools:context=".Welcome" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.864" >
+            android:layout_alignParentBottom="true"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <LinearLayout
-                android:layout_width="409dp"
-                android:layout_height="103dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:orientation="horizontal"
-                tools:layout_editor_absoluteX="1dp"
-                tools:layout_editor_absoluteY="627dp">
-
+                android:weightSum="10">
 
                 <Switch
-                    android:id="@+id/switchON"
+                    android:id="@+id/location_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="7"
                     android:text="Switch" />
 
                 <Button
-                    android:id="@+id/SearchTaxi"
+                    android:id="@+id/btn_find_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Search Cab" />
+                    android:layout_weight="7"
+                    android:text="FIND USER" />
+
+
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
 
 
 

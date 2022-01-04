@@ -7,5 +7,5 @@ import retrofit2.http.Url;
 
 public interface IGoogleApi {
     @GET
-    Call getPath(@Url String url );
+     Call getPath(@Url String url) ;
 }

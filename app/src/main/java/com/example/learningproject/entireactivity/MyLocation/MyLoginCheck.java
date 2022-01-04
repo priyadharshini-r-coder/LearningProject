@@ -70,7 +70,7 @@ public class MyLoginCheck extends AppCompatActivity {
                            .child("Users").child("Drivers").child(user_id);
 
                }
-               user_db.setValue(email);
+
               user_db.setValue(password);
 
            }
