@@ -33,12 +33,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -60,17 +57,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -218,7 +215,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
             finish();
         });
         polyLineList = new ArrayList<>();
-       /*  binding.btnGo.setOnClickListener(new View.OnClickListener() {
+         binding.btnGo.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  if(binding.locationSwitch.isChecked())
@@ -233,10 +230,10 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                      Toast.makeText(MyMapActivity.this,"Please change your status to online", Toast.LENGTH_SHORT).show();
                  }
              }
-         });*/
+         });
 
 
-       places = (SupportPlaceAutocompleteFragment)getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+      /* places = (SupportPlaceAutocompleteFragment)getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place)
@@ -259,7 +256,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                 Toast.makeText(MyMapActivity.this, ""+status.toString(),Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
 
         // Geo Fire
         drivers = FirebaseDatabase.getInstance().getReference("Users").child("Customers").child("Users Location");
@@ -287,17 +284,12 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
             Log.d("UBER",requestApi); //Print Url for debug
 
             mService.getPath(requestApi)
-                    .enqueue(new Callback() {
+                    .enqueue(new Callback<String>() {
                         @Override
-                        public void onFailure(Request request, IOException e) {
-                            Toast.makeText(MyMapActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onResponse(Response response) throws IOException {
+                        public void onResponse(Call<String> call, Response<String> response) {
 
                             try {
-                                JSONObject jsonObject = new JSONObject(response.body().toString());
+                                JSONObject jsonObject = new JSONObject(response.body());
                                 JSONArray jsonArray = jsonObject.getJSONArray("routes");
                                 for(int i=0;i<jsonArray.length();i++)
                                 {
@@ -369,6 +361,14 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                                 e.printStackTrace();
                             }
                         }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(MyMapActivity.this,""+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+
+
+
 
 
 

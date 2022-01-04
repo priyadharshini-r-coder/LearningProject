@@ -1,7 +1,8 @@
 package com.example.learningproject.entireactivity.apiRetrofit;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class RetrofitClient {
     private static Retrofit retrofit = null;
@@ -12,7 +13,7 @@ public class RetrofitClient {
         {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseURL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;

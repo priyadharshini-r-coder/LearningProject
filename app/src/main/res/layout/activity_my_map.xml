@@ -31,14 +31,15 @@
             app:layout_constraintVertical_bias="1.0"
             tools:layout_editor_absoluteX="0dp">
 
-<!--            <EditText-->
-<!--                android:id="@+id/edtPlace"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:hint="Enter PickUp Location" />-->
-            <fragment
+            <EditText
+                android:id="@+id/edtPlace"
+                android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:hint="Enter PickUp Location" />
+
+           <!-- <fragment
                 android:id="@+id/place_autocomplete_fragment"
                 android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
                 android:layout_width="0dp"
@@ -48,16 +49,16 @@
                 app:layout_constraintBottom_toTopOf="@+id/map"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/btnGo"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="GO" />-->
+           <Button
+                android:id="@+id/btnGo"
+               android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+               android:layout_weight="1"
+                android:text="GO" />
         </LinearLayout>
 
         <fragment
