@@ -26,6 +26,8 @@ import com.example.learningproject.entireactivity.EntireMainActivity;
 import com.example.learningproject.entireactivity.apiRetrofit.CommonUrl;
 import com.example.learningproject.entireactivity.apiRetrofit.IGoogleApi;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -57,6 +59,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,6 +69,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+
+import retrofit2.Response;
 
 public class MyMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -261,7 +268,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                         }
 
                         @Override
-                        public void onResponse(Response response) throws IOException {
+                        public void onResponse(com.squareup.okhttp.Response response) throws IOException {
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response.body().toString());
@@ -336,6 +343,8 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                                 e.printStackTrace();
                             }
                         }
+
+
 
 
 
