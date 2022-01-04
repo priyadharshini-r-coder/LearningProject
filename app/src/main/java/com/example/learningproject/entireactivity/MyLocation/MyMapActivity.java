@@ -25,8 +25,7 @@ import com.example.learningproject.databinding.ActivityMyMapBinding;
 import com.example.learningproject.entireactivity.EntireMainActivity;
 import com.example.learningproject.entireactivity.apiRetrofit.CommonUrl;
 import com.example.learningproject.entireactivity.apiRetrofit.IGoogleApi;
-import com.firebase.geofire.GeoFire;
-import com.firebase.geofire.GeoLocation;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -58,9 +57,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
