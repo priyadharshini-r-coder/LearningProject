@@ -71,6 +71,7 @@ public class MyLoginCheck extends AppCompatActivity {
 
                }
                user_db.setValue(email);
+              user_db.setValue(password);
 
            }
        });
@@ -96,7 +97,8 @@ public class MyLoginCheck extends AppCompatActivity {
                      user_db = FirebaseDatabase.getInstance().getReference()
                              .child("Users").child("Drivers").child(user_id);
                  }
-                 user_db.setValue(email, password);
+                 user_db.setValue(email);
+                 user_db.setValue(password);
              }
          });
      });

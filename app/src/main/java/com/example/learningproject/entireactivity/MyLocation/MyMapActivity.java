@@ -13,31 +13,29 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-import android.widget.Switch;
+import android.widget.CompoundButton;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
+
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityMyMapBinding;
 import com.example.learningproject.entireactivity.EntireMainActivity;
 import com.example.learningproject.entireactivity.apiRetrofit.CommonUrl;
 import com.example.learningproject.entireactivity.apiRetrofit.IGoogleApi;
-
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -65,31 +63,34 @@ import com.squareup.okhttp.Request;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-
-import retrofit2.Response;
 
 public class MyMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private ActivityMyMapBinding binding;
     private GoogleMap mMap;
+
     // Play Services
     private  static final int MY_PERMISSION_REQUEST_CODE = 7000;
     private  static final int PLAY_SERVICE_RES_REQUEST = 7001;
+
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
+
     private static int UPDATE_INTERVAL = 5000;
     private static int FASTEST_INTERVAL = 3000;
     private static int DISPLACEMENT = 10;
+
     DatabaseReference drivers;
     GeoFire geoFire;
+
     Marker mCurrent;
+
     SupportMapFragment mapFragment;
 
     // Car animation
@@ -128,21 +129,24 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
             final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
             valueAnimator.setDuration(3000);
             valueAnimator.setInterpolator(new LinearInterpolator());
-            valueAnimator.addUpdateListener(animation -> {
-                v = valueAnimator.getAnimatedFraction();
-                lng = v * endPosition.longitude+(1-v) * startPosition.longitude;
-                lat = v * endPosition.latitude+(1-v) * startPosition.latitude;
-                LatLng newPos = new LatLng(lat, lng);
-                carMarker.setPosition(newPos);
-                carMarker.setAnchor(0.5f, 0.5f);
-                carMarker.setRotation(getBearing(startPosition, newPos));
-                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
-                        new CameraPosition.Builder()
-                                .target(newPos)
-                                .zoom(15.5f)
-                                .build()
-                ));
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    v = valueAnimator.getAnimatedFraction();
+                    lng = v * endPosition.longitude+(1-v) * startPosition.longitude;
+                    lat = v * endPosition.latitude+(1-v) * startPosition.latitude;
+                    LatLng newPos = new LatLng(lat, lng);
+                    carMarker.setPosition(newPos);
+                    carMarker.setAnchor(0.5f, 0.5f);
+                    carMarker.setRotation(getBearing(startPosition, newPos));
+                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
+                            new CameraPosition.Builder()
+                                    .target(newPos)
+                                    .zoom(15.5f)
+                                    .build()
+                    ));
 
+                }
             });
 
             valueAnimator.start();
@@ -170,7 +174,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_my_map);
+      binding=DataBindingUtil.setContentView(this,R.layout.activity_my_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -178,9 +182,37 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
 
         // init view
 
-        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+
+       binding.switchON.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton compoundButton, boolean isOnline) {
+               if(isOnline)
+               {
+                   startLocationUpdates();
+                   displayLocation();
+                   Snackbar.make(mapFragment.getView(), "You are online",Snackbar.LENGTH_SHORT).show();
+               }
+               else
+               {
+                   stopLocationUpdates();
+                   mCurrent.remove();
+                   mMap.clear();
+                   handler.removeCallbacks(drawPathRunnable);
+                   Snackbar.make(mapFragment.getView(), "You are offline",Snackbar.LENGTH_SHORT).show();
+               }
+           }
+
+        });
+
+        polyLineList = new ArrayList<>();
+
+        binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopLocationUpdates();
+                mCurrent.remove();
+                mMap.clear();
+                handler.removeCallbacks(drawPathRunnable);
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(MyMapActivity.this, EntireMainActivity.class);
                 startActivity(intent);
@@ -188,51 +220,14 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
             }
         });
 
-       binding.locationSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
-
-                if(b)
-                {
-                    startLocationUpdates();
-                    displayLocation();
-                    Snackbar.make(mapFragment.getView(), "You are online",Snackbar.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    stopLocationUpdates();
-                    mCurrent.remove();
-                    mMap.clear();
-                    handler.removeCallbacks(drawPathRunnable);
-                    Snackbar.make(mapFragment.getView(), "You are offline",Snackbar.LENGTH_SHORT).show();
-                }
-            });
-
-        polyLineList = new ArrayList<>();
-
-
-       /* places = (SupportPlaceAutocompleteFragment)getSupportFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-        places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place)
-            {
-                if(binding.locationSwitch.isChecked())
-                {
-                    destination = Objects.requireNonNull(place.getAddress()).toString();
-                    destination = destination.replace(" ", "+");
-
-                    getDirection();
-                }
-                else
-                {
-                    Toast.makeText(MyMapActivity.this,"Please change your status to online", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onError(Status status) {
-                Toast.makeText(MyMapActivity.this, ""+status.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
+         binding.Golocation.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+               destination=binding.editPlace.getText().toString();
+               destination=destination.replace("","+");
+               getDirection();
+             }
+         });
 
         // Geo Fire
         drivers = FirebaseDatabase.getInstance().getReference("Users").child("Customers").child("Locations");
@@ -347,8 +342,6 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
 
 
 
-
-
                     });
         }
         catch (Exception e)
@@ -391,7 +384,8 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         return poly;
     }
 
-
+    // Press Ctrl+O
+    // Becsuse we request runtime permission, we need override OnRequestPermissionResult method
 
 
     @Override
@@ -403,7 +397,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                     buildGoogleApiClient();
                     createLocationRequest();
 
-                    if (binding.locationSwitch.isChecked()) {
+                    if (binding.switchON.isChecked()) {
                         displayLocation();
                     }
                 }
@@ -430,7 +424,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                 buildGoogleApiClient();
                 createLocationRequest();
 
-                if(binding.locationSwitch.isChecked())
+                if(binding.switchON.isChecked())
                 {
                     displayLocation();
                 }
@@ -482,7 +476,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         {
             return;
         }
-        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
     }
 
     private void displayLocation()
@@ -496,7 +490,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
 
         if(mLastLocation != null)
         {
-            if(binding.locationSwitch.isChecked())
+            if(binding.switchON.isChecked())
             {
                 final double latitude = mLastLocation.getLatitude();
                 final double longitude = mLastLocation.getLongitude();
@@ -560,7 +554,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
 
     }
 
@@ -575,6 +569,10 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         mMap.setBuildingsEnabled(false);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
+        /* Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
     @Override
@@ -598,8 +596,6 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
     {
         mGoogleApiClient.connect();
     }
-
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

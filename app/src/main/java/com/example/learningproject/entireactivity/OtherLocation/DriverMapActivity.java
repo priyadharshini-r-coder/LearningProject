@@ -20,7 +20,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.learningproject.MainActivity;
+
 import com.example.learningproject.R;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
