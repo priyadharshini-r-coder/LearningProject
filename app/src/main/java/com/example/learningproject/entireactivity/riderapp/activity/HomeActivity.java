@@ -796,7 +796,7 @@ public class HomeActivity extends AppCompatActivity implements
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.setInfoWindowAdapter(new CustomInfoWindow(this));
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.uber_style_map));
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
