@@ -67,6 +67,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MyMapActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
@@ -178,7 +179,9 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }
 
         // init view
 
@@ -190,7 +193,7 @@ public class MyMapActivity extends FragmentActivity implements OnMapReadyCallbac
                {
                    startLocationUpdates();
                    displayLocation();
-                   Snackbar.make(mapFragment.getView(), "You are online",Snackbar.LENGTH_SHORT).show();
+                   Snackbar.make(Objects.requireNonNull(mapFragment.getView()), "You are online",Snackbar.LENGTH_SHORT).show();
                }
                else
                {
