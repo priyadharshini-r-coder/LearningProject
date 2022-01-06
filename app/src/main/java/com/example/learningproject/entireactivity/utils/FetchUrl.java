@@ -1,7 +1,5 @@
 package com.example.learningproject.entireactivity.utils;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -76,7 +74,6 @@ public class  FetchUrl extends AsyncTask<String, Void, String> {
         } finally {
             assert iStream != null;
             iStream.close();
-            assert urlConnection != null;
             urlConnection.disconnect();
         }
         return data;

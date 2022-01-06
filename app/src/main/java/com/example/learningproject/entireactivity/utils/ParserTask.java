@@ -1,11 +1,9 @@
 package com.example.learningproject.entireactivity.utils;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -19,7 +17,7 @@ import java.util.Objects;
 public class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
     // Parsing the data in non-ui thread
-    private GoogleMap mMap;
+
     @Override
     protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
@@ -48,7 +46,7 @@ public class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<Str
     @Override
     protected void onPostExecute(List<List<HashMap<String, String>>> result) {
         ArrayList<LatLng> points;
-        PolylineOptions lineOptions = null;
+        PolylineOptions lineOptions;
 
         // Traversing through all the routes
         for (int i = 0; i < result.size(); i++) {
@@ -62,8 +60,8 @@ public class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<Str
             for (int j = 0; j < path.size(); j++) {
                 HashMap<String, String> point = path.get(j);
 
-                double lat = Double.parseDouble(point.get("lat"));
-                double lng = Double.parseDouble(point.get("lng"));
+                double lat = Double.parseDouble(Objects.requireNonNull(point.get("lat")));
+                double lng = Double.parseDouble(Objects.requireNonNull(point.get("lng")));
                 LatLng position = new LatLng(lat, lng);
 
                 points.add(position);
@@ -79,12 +77,6 @@ public class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<Str
         }
 
         // Drawing polyline in the Google Map for the i-th route
-        if(lineOptions != null) {
-           mMap.addPolyline(lineOptions);
 
-        }
-        else {
-            Log.d("onPostExecute","without Polylines drawn");
-        }
     }
 }
