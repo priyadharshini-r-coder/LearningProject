@@ -13,62 +13,73 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class  FetchUrl extends AsyncTask<String, Void, String> {
-    @SuppressLint("StaticFieldLeak")
-    Context mContext;
-    String directionMode = "driving";
-
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(String... url) {
+
         // For storing data from web service
         String data = "";
-        directionMode = strings[1];
+
         try {
             // Fetching the data from web service
-            data = downloadUrl(strings[0]);
-            Log.d("mylog", "Background task data " + data);
+            data = downloadUrl(url[0]);
+            Log.d("Background Task data", data);
         } catch (Exception e) {
             Log.d("Background Task", e.toString());
         }
         return data;
     }
 
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        ParserTask parserTask = new ParserTask(mContext, directionMode);
-        // Invokes the thread for parsing the JSON data
-        parserTask.execute(s);
-    }
 
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+
+        ParserTask parserTask = new ParserTask();
+
+        // Invokes the thread for parsing the JSON data
+        parserTask.execute(result);
+
+    }
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(strUrl);
+
             // Creating an http connection to communicate with url
             urlConnection = (HttpURLConnection) url.openConnection();
+
             // Connecting to url
             urlConnection.connect();
+
             // Reading data from url
             iStream = urlConnection.getInputStream();
+
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-            StringBuilder sb = new StringBuilder();
+
+            StringBuilder sb;
+            sb = new StringBuilder();
+
             String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
+
             data = sb.toString();
-            Log.d("mylog", "Downloaded URL: " + data);
+            Log.d("downloadUrl", data);
             br.close();
+
         } catch (Exception e) {
-            Log.d("mylog", "Exception downloading URL: " + e.toString());
+            Log.d("Exception", e.toString());
         } finally {
             assert iStream != null;
             iStream.close();
+            assert urlConnection != null;
             urlConnection.disconnect();
         }
         return data;
     }
+
 }

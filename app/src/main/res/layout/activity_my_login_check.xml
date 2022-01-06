@@ -7,6 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_1"
         tools:context=".entireactivity.MyLocation.MyLoginCheck">
 
         <EditText
@@ -14,10 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:layout_marginStart="5dp"
             app:layout_constraintBottom_toTopOf="@+id/etPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/btn_border"
             app:layout_constraintVertical_bias="0.74" />
 
         <EditText
@@ -26,7 +29,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="84dp"
             android:hint="Password"
+            android:layout_marginStart="5dp"
             android:inputType="textPassword"
+            android:background="@drawable/btn_border"
             app:layout_constraintBottom_toTopOf="@+id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -37,6 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
             android:text="Login"
+            android:layout_margin="10dp"
+            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
             app:layout_constraintBottom_toTopOf="@+id/btnSignup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -47,6 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="124dp"
             android:text="Sign up"
+            android:layout_margin="10dp"
+            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

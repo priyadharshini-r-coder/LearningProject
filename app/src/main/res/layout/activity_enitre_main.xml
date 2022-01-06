@@ -7,24 +7,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_2"
         tools:context=".entireactivity.EntireMainActivity">
 
         <Button
             android:id="@+id/btnCustomer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_margin="10dp"
             android:text="I'm a customer"
+            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.623" />
 
         <Button
             android:id="@+id/btnDriver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="I'm a driver"
+            android:layout_margin="10dp"
+            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnCustomer" />
+            app:layout_constraintTop_toBottomOf="@+id/btnCustomer"
+            app:layout_constraintVertical_bias="0.263"
+            tools:layout_editor_absoluteX="10dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

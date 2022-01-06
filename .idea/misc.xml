@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/btn_border.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/edit_text_round_bg_outline.xml" value="0.2203125" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_1.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_2.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_3.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_background.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_chevron_right_black_24dp.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_location.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_locations.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/selector_color.xml" value="0.2203125" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_animate_route.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_current_location.xml" value="0.19010416666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_enitre_main.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_launch_one.xml" value="0.19010416666666666" />
@@ -21,6 +27,9 @@
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_show_map.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_show_map_position.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/bottom_layout.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/fragment_ola_ride.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/row_ride_estimate.xml" value="0.20416666666666666" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/menu/main.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/drawable-v24/ic_location.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/drawable/card_border.xml" value="0.18020833333333333" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1" />
