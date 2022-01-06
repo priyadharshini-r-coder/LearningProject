@@ -9,6 +9,7 @@
         android:layout_height="match_parent"
         tools:context=".entireactivity.MyLocation.MyMapActivity">
 
+
         <Button
             android:id="@+id/Logout_Button"
             android:layout_width="wrap_content"
@@ -25,40 +26,53 @@
             android:id="@+id/layout_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/map"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             tools:layout_editor_absoluteX="0dp">
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/edtPlace"
                 android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:hint="Enter PickUp Location" />
+                android:hint="Enter PickUp Location" />-->
 
-           <!-- <fragment
-                android:id="@+id/place_autocomplete_fragment"
+            <fragment
+                android:id="@+id/place_autocomplete"
                 android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
-                android:layout_weight="5"
+                android:layout_weight="2"
                 app:layout_constraintBottom_toTopOf="@+id/map"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />-->
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--<fragment
+                android:id="@+id/place_autocomplete2"
+                android:name="com.google.android.gms.location.places.ui.SupportPlaceAutocompleteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:layout_weight="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/map"
+                app:layout_constraintVertical_bias="0.141"
+                tools:layout_editor_absoluteX="16dp" />-->
 
-           <Button
+
+
+       <!--    <Button
                 android:id="@+id/btnGo"
                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                android:layout_weight="1"
-                android:text="GO" />
+                android:text="GO" />-->
         </LinearLayout>
 
         <fragment
@@ -104,6 +118,8 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+
 
 
 
