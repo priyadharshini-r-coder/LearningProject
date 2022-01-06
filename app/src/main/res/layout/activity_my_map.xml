@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+
     tools:context=".entireactivity.MyLocation.MyMapActivity"
     android:orientation="vertical"
     android:weightSum="1">
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:textColor="#fff"
-        android:backgroundTint="@color/transparent"
+
         />
 
     <fragment
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:textColor="#fff"
-        android:backgroundTint="@color/transparent"
+
         android:layout_marginBottom="10dp"
         />
 

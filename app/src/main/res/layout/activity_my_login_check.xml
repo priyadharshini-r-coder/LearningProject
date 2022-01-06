@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/btn_border"
+            android:background="@drawable/edit_text_round_bg_outline"
             app:layout_constraintVertical_bias="0.74" />
 
         <EditText
@@ -43,7 +43,7 @@
             android:layout_marginBottom="48dp"
             android:text="Login"
             android:layout_margin="10dp"
-            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
+
             app:layout_constraintBottom_toTopOf="@+id/btnSignup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -55,7 +55,7 @@
             android:layout_marginBottom="124dp"
             android:text="Sign up"
             android:layout_margin="10dp"
-            android:backgroundTint="@drawable/btn_decline_pickup_request_background"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
