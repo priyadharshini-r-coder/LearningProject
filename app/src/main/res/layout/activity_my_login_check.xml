@@ -20,7 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/edit_text_round_bg_outline"
+            android:background="@drawable/btn_border"
             app:layout_constraintVertical_bias="0.74" />
 
         <EditText
