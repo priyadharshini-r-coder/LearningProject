@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +8,7 @@
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
-    tools:showIn="@layout/app_bar_main">
+    tools:ignore="MissingDefaultResource">
 
 
     <fragment
@@ -81,7 +80,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
-
+<!--
                             <com.balysv.materialripple.MaterialRippleLayout
                                 android:id="@+id/ripple"
                                 android:layout_width="match_parent"
@@ -116,7 +115,7 @@
                                     android:visibility="visible"/>
 
 
-                            </com.balysv.materialripple.MaterialRippleLayout>
+                            </com.balysv.materialripple.MaterialRippleLayout>-->
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -125,7 +124,7 @@
 
                                 >
 
-                                <com.github.vipulasri.timelineview.TimelineView
+                                <!--<com.github.vipulasri.timelineview.TimelineView
                                     android:id="@+id/time_marker1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
@@ -134,7 +133,7 @@
                                     app:lineSize="1dp"
 
 
-                                    app:markerSize="10dp"/>
+                                    app:markerSize="10dp"/>-->
                             </RelativeLayout>
 
 
@@ -146,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
-                            <com.balysv.materialripple.MaterialRippleLayout
+                           <!-- <com.balysv.materialripple.MaterialRippleLayout
                                 android:id="@+id/ripple1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -175,7 +174,7 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/nml_dv_txt"/>
-                            </com.balysv.materialripple.MaterialRippleLayout>
+                            </com.balysv.materialripple.MaterialRippleLayout>-->
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -184,7 +183,7 @@
 
                                 >
 
-                                <com.github.vipulasri.timelineview.TimelineView
+                              <!--  <com.github.vipulasri.timelineview.TimelineView
                                     android:id="@+id/time_marker"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
@@ -193,7 +192,7 @@
                                     app:lineSize="1dp"
 
                                     app:marker="@color/colorRed"
-                                    app:markerSize="10dp"/>
+                                    app:markerSize="10dp"/>-->
                             </RelativeLayout>
 
                         </RelativeLayout>
@@ -696,5 +695,5 @@
     </LinearLayout>
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

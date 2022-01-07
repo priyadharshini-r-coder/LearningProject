@@ -26,13 +26,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
 
-        <activity android:name=".entireactivity.OtherLocation.DriverAuthActivity" />
+        <activity android:name=".entireactivity.OtherLocation.DriverLogin" />
         <activity android:name=".entireactivity.OtherLocation.DriverMapActivity" />
         <activity
-            android:name=".entireactivity.MyLocation.MyMapActivity"
+            android:name=".entireactivity.MyLocation.CustomerMap"
             android:exported="false" />
         <activity
-            android:name=".entireactivity.MyLocation.MyLoginCheck"
+            android:name=".entireactivity.MyLocation.CustomerLogin"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -110,4 +110,9 @@
     <string name="sign_up">Sign up</string>
     <string name="i_m_a_customer">I\'m a customer</string>
     <string name="i_m_a_driver">I\'m a driver</string>
+    <string name="destination">Destination</string>
+    <string name="picked_customer">Pickup Customer</string>
+    <string name="settings">Settings</string>
+    <string name="history">History</string>
+    <string name="working">Working</string>
 </resources>
