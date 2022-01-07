@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers;
+package com.example.learningproject.newChanges;
 
 public class activites {
 }

@@ -1,8 +1,9 @@
-package com.example.learningproject.parsers.services;
+package com.example.learningproject.newChanges.services;
 
 
-import com.example.learningproject.parsers.common.CommonUrl;
-import com.example.learningproject.parsers.model.Token;
+import com.example.learningproject.newChanges.common.CommonUrl;
+
+import com.example.learningproject.newChanges.model.Token;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

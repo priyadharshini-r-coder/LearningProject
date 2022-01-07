@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.model;
+package com.example.learningproject.newChanges.model;
 
 import java.util.List;
 

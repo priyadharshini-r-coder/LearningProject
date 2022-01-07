@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.services;
+package com.example.learningproject.newChanges.services;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
