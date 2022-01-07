@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.remote;
+package com.example.learningproject.newChanges.remote;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

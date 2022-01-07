@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.model;
+package com.example.learningproject.newChanges.model;
 
 public class Notification {
     public String title;

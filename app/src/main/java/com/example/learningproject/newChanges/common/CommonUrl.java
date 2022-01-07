@@ -1,9 +1,9 @@
-package com.example.learningproject.parsers.common;
+package com.example.learningproject.newChanges.common;
 
-import com.example.learningproject.parsers.remote.FCMClient;
-import com.example.learningproject.parsers.remote.GoogleMapsAPI;
-import com.example.learningproject.parsers.remote.IFCMService;
-import com.example.learningproject.parsers.remote.IGoogleAPI;
+import com.example.learningproject.newChanges.remote.FCMClient;
+import com.example.learningproject.newChanges.remote.GoogleMapsAPI;
+import com.example.learningproject.newChanges.remote.IFCMService;
+import com.example.learningproject.newChanges.remote.IGoogleAPI;
 
 public class CommonUrl {
 

@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.activity;
+package com.example.learningproject.newChanges.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.example.learningproject.R;
-import com.example.learningproject.parsers.common.CommonUrl;
-import com.example.learningproject.parsers.model.Rider;
+import com.example.learningproject.newChanges.common.CommonUrl;
+import com.example.learningproject.newChanges.model.Rider;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;

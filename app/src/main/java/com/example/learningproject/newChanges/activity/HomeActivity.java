@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.activity;
+package com.example.learningproject.newChanges.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,15 +22,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.learningproject.R;
-import com.example.learningproject.parsers.common.CommonUrl;
-import com.example.learningproject.parsers.fragment.BottomSheetRiderFragment;
-import com.example.learningproject.parsers.helper.CustomInfoWindow;
-import com.example.learningproject.parsers.model.FCMResponse;
-import com.example.learningproject.parsers.model.Notification;
-import com.example.learningproject.parsers.model.Rider;
-import com.example.learningproject.parsers.model.Sender;
-import com.example.learningproject.parsers.model.Token;
-import com.example.learningproject.parsers.remote.IFCMService;
+import com.example.learningproject.newChanges.common.CommonUrl;
+import com.example.learningproject.newChanges.fragment.BottomSheetRiderFragment;
+import com.example.learningproject.newChanges.helper.CustomInfoWindow;
+import com.example.learningproject.newChanges.model.FCMResponse;
+import com.example.learningproject.newChanges.model.Notification;
+import com.example.learningproject.newChanges.model.Rider;
+import com.example.learningproject.newChanges.model.Sender;
+import com.example.learningproject.newChanges.model.Token;
+import com.example.learningproject.newChanges.remote.IFCMService;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;

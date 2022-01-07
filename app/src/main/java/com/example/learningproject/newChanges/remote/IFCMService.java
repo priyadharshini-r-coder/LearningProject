@@ -1,7 +1,7 @@
-package com.example.learningproject.parsers.remote;
+package com.example.learningproject.newChanges.remote;
 
-import com.example.learningproject.parsers.model.FCMResponse;
-import com.example.learningproject.parsers.model.Sender;
+import com.example.learningproject.newChanges.model.FCMResponse;
+import com.example.learningproject.newChanges.model.Sender;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -1,4 +1,4 @@
-package com.example.learningproject.parsers.fragment;
+package com.example.learningproject.newChanges.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.learningproject.R;
-import com.example.learningproject.parsers.common.CommonUrl;
-import com.example.learningproject.parsers.remote.IGoogleAPI;
+import com.example.learningproject.newChanges.common.CommonUrl;
+import com.example.learningproject.newChanges.remote.IGoogleAPI;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.json.JSONArray;
