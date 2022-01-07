@@ -12,9 +12,12 @@
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_2.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_3.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/gradient_background.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_account.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_chevron_right_black_24dp.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_exit.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_history.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_map.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_monetization.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_location.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_my_locations.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/drawable/ic_payment.xml" value="0.1" />
@@ -30,21 +33,30 @@
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_driver_login.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_driver_map.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_enitre_main.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_launch_one.xml" value="0.19010416666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_launcher.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_location_service.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_location_tracking.xml" value="0.20416666666666666" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_main_location.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_my_login_check.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_my_map.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_show_map.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/activity_show_map_position.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/app_bar_home.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/bottom_layout.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/bottom_sheet_rider.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/content_home.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/custom_rider_info_window.xml" value="0.20416666666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/fragment_ola_ride.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/layout_register.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/layout/layout_signin.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/layout/row_ride_estimate.xml" value="0.20416666666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/menu/activity_drawer_home_drawer.xml" value="0.1" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Data/LearningProject/app/src/main/res/menu/home.xml" value="0.20416666666666666" />
         <entry key="..\:/Data/LearningProject/app/src/main/res/menu/main.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/drawable-v24/ic_location.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/drawable/card_border.xml" value="0.18020833333333333" />
