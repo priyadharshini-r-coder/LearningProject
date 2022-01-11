@@ -36,7 +36,7 @@ public class EntireMainActivity extends AppCompatActivity {
     private void setDatabase() {
         mAuth = FirebaseAuth.getInstance();
         mDB = FirebaseDatabase.getInstance();
-        mUsers = mDB.getReference(CommonUrl.user_driver_tb1);
+        mUsers = mDB.getReference("Users");
     }
     private void setOnClicks() {
         binding.btnDriver.setOnClickListener(v -> {

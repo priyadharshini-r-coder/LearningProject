@@ -66,8 +66,9 @@ public class CustomerLogin extends AppCompatActivity {
                 }else{
                     String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference(CommonUrl.user_driver_tb1).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id).child("name");
                     current_user_db.setValue(report);
+
                 }
             });
         });

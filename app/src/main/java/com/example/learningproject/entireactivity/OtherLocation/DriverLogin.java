@@ -28,8 +28,8 @@ public class DriverLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
      binding=DataBindingUtil.setContentView(this,R.layout.activity_driver_login);
         // Get Role from Intent
-        Bundle bundle=getIntent().getExtras();
-        role=bundle.getString(Constants.IntentTypes.ROLE,null);
+//        Bundle bundle=getIntent().getExtras();
+//        role=bundle.getString(Constants.IntentTypes.ROLE,null);
      setFirebase();
      setonClicks();
     }
@@ -59,11 +59,11 @@ public class DriverLogin extends AppCompatActivity {
                     Toast.makeText(DriverLogin.this, "sign up error", Toast.LENGTH_SHORT).show();
                 }else{
                     String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                    if (role != null && role.equals("Driver")) {
+
                         DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(user_id).child("name");
                         current_user_db.setValue(email);
 
-                    }
+
 
 
                 }
