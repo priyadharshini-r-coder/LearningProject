@@ -72,7 +72,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       binding= DataBindingUtil. setContentView(this,R.layout.activity_customer_map);
+    //   binding= DataBindingUtil. setContentView(this,R.layout.activity_customer_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -81,65 +81,65 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
 
 
 
-       binding. btnLogout.setOnClickListener(view -> {
-           Intent intent = new Intent(CustomerMapActivity.this, MainActivity.class);
-           startActivity(intent);
-           SharedPrefUtils.setStringPreference(CustomerMapActivity.this, Constants.USER_ID, null);
-           finish();
-       });
-       binding. btnSelectSeats.setOnClickListener(view -> {
-           id = 1;
-           String userId;
-           if (requestBol) {
-               requestBol = false;
-               geoQuery.removeAllListeners();
-               driverLocationRef.removeEventListener(driverLocationListener);
-
-               if (driverFoundId != null) {
-                   DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("SignupOwners").child(driverFoundId);
-                   driverRef.setValue(null);
-                   driverFoundId = null;
-               }
-               driverFound = false;
-               radius = 1;
-               userId = SharedPrefUtils.getStringPreference(CustomerMapActivity.this, Constants.USER_ID);
-               if (userId != null) {
-                   DatabaseReference customerDatabaseRefrence = FirebaseDatabase.getInstance().getReference("customerRequest");
-                   GeoFire geoFire = new GeoFire(customerDatabaseRefrence);
-                   geoFire.removeLocation(userId);
-                   if (pickUpMarker != null) {
-                       pickUpMarker.remove();
-                   }
-                  binding.request.setText("Call Uber");
-               }
-               binding.llDriverInfo.setVisibility(View.GONE);
-               binding.tvDriverName.setText("");
-               binding.tvDriverPhoneNo.setText("");
-               binding.tvDriverVehicleType.setText("");
-               binding.imgDriverProfileImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_account));
-
-
-           } else {
-               requestBol = true;
-               userId = SharedPrefUtils.getStringPreference(CustomerMapActivity.this, Constants.USER_ID);
-
-               if (userId != null) {
-                   DatabaseReference customerDatabaseRefrence = FirebaseDatabase.getInstance().getReference("customerRequest");
-                   GeoFire geoFire = new GeoFire(customerDatabaseRefrence);
-                   geoFire.setLocation(userId, new GeoLocation(lastLocation.getLatitude(), lastLocation.getLongitude()), (key, error) -> {
-
-                   });
-                   pickupLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-                   pickUpMarker = mMap.addMarker(new MarkerOptions().position(pickupLocation).title("Pickup Hedd  re").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pickup)));
-
-                   binding.request.setText("Getting your Driver...");
-                   getClosestDriver();
-
-               }
-           }
-
-
-       });
+//       binding. btnLogout.setOnClickListener(view -> {
+//           Intent intent = new Intent(CustomerMapActivity.this, MainActivity.class);
+//           startActivity(intent);
+//           SharedPrefUtils.setStringPreference(CustomerMapActivity.this, Constants.USER_ID, null);
+//           finish();
+//       });
+//       binding. btnSelectSeats.setOnClickListener(view -> {
+//           id = 1;
+//           String userId;
+//           if (requestBol) {
+//               requestBol = false;
+//               geoQuery.removeAllListeners();
+//               driverLocationRef.removeEventListener(driverLocationListener);
+//
+//               if (driverFoundId != null) {
+//                   DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("SignupOwners").child(driverFoundId);
+//                   driverRef.setValue(null);
+//                   driverFoundId = null;
+//               }
+//               driverFound = false;
+//               radius = 1;
+//               userId = SharedPrefUtils.getStringPreference(CustomerMapActivity.this, Constants.USER_ID);
+//               if (userId != null) {
+//                   DatabaseReference customerDatabaseRefrence = FirebaseDatabase.getInstance().getReference("customerRequest");
+//                   GeoFire geoFire = new GeoFire(customerDatabaseRefrence);
+//                   geoFire.removeLocation(userId);
+//                   if (pickUpMarker != null) {
+//                       pickUpMarker.remove();
+//                   }
+//                  binding.request.setText("Call Uber");
+//               }
+////               binding.llDriverInfo.setVisibility(View.GONE);
+////               binding.tvDriverName.setText("");
+////               binding.tvDriverPhoneNo.setText("");
+////               binding.tvDriverVehicleType.setText("");
+////               binding.imgDriverProfileImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_account));
+//
+//
+//           } else {
+//               requestBol = true;
+//               userId = SharedPrefUtils.getStringPreference(CustomerMapActivity.this, Constants.USER_ID);
+//
+//               if (userId != null) {
+//                   DatabaseReference customerDatabaseRefrence = FirebaseDatabase.getInstance().getReference("customerRequest");
+//                   GeoFire geoFire = new GeoFire(customerDatabaseRefrence);
+//                   geoFire.setLocation(userId, new GeoLocation(lastLocation.getLatitude(), lastLocation.getLongitude()), (key, error) -> {
+//
+//                   });
+//                   pickupLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+//                   pickUpMarker = mMap.addMarker(new MarkerOptions().position(pickupLocation).title("Pickup Hedd  re").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pickup)));
+//
+//                   binding.request.setText("Getting your Driver...");
+//                   getClosestDriver();
+//
+//               }
+//           }
+//
+//
+//       });
         binding.request.setOnClickListener(view -> {
             String userId;
             if (requestBol) {
@@ -164,11 +164,11 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                     }
                     binding.request.setText("Call Uber");
                 }
-               binding.llDriverInfo.setVisibility(View.GONE);
-               binding. tvDriverName.setText("");
-                binding.tvDriverPhoneNo.setText("");
-                binding.tvDriverVehicleType.setText("");
-                binding.imgDriverProfileImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_account));
+//               binding.llDriverInfo.setVisibility(View.GONE);
+//               binding. tvDriverName.setText("");
+//                binding.tvDriverPhoneNo.setText("");
+//                binding.tvDriverVehicleType.setText("");
+//                binding.imgDriverProfileImage.setImageDrawable(getResources().getDrawable(R.drawable.ic_account));
 
 
             } else {
@@ -190,10 +190,10 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                 }
             }
         });
-        binding.btnSettings.setOnClickListener(view -> {
-            Intent intent = new Intent(CustomerMapActivity.this, CustomerSettingActivity.class);
-            startActivity(intent);
-        });
+//        binding.btnSettings.setOnClickListener(view -> {
+//            Intent intent = new Intent(CustomerMapActivity.this, CustomerSettingActivity.class);
+//            startActivity(intent);
+//        });
     }
 
     private void getClosestDriver() {
@@ -257,7 +257,7 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
     }
 
     private void getDriverInfo() {
-       binding.llDriverInfo.setVisibility(View.VISIBLE);
+      // binding.llDriverInfo.setVisibility(View.VISIBLE);
         DatabaseReference diverDatabase = FirebaseDatabase.getInstance().getReference().child("SignupOwners").child(driverFoundId);
      //   Utils.showProgressDialog(this, true);
         diverDatabase.addValueEventListener(new ValueEventListener() {
@@ -269,21 +269,21 @@ public class CustomerMapActivity extends FragmentActivity implements OnMapReadyC
                     assert map != null;
                     if (map.get("email") != null) {
                         String email = Objects.requireNonNull(map.get("email")).toString();
-                        binding.tvDriverName.setText(email);
+                    //    binding.tvDriverName.setText(email);
                     }
                     if (map.get("phoneno") != null) {
                         String phoneNo = Objects.requireNonNull(map.get("phoneno")).toString();
-                        binding.tvDriverPhoneNo.setText(phoneNo);
+                       // binding.tvDriverPhoneNo.setText(phoneNo);
 
                     }
                     if (map.get("vehicleType") != null) {
                         String vehicleType = Objects.requireNonNull(map.get("vehicleType")).toString();
-                        binding.tvDriverPhoneNo.setText(vehicleType);
+                     //   binding.tvDriverPhoneNo.setText(vehicleType);
 
                     }
                     if (map.get("profileImageUri") != null) {
                         String profileUrl = Objects.requireNonNull(map.get("profileImageUri")).toString();
-                        Glide.with(getApplication()).load(profileUrl).into(binding.imgDriverProfileImage);
+                      //  Glide.with(getApplication()).load(profileUrl).into(binding.imgDriverProfileImage);
                     }
 
                 }

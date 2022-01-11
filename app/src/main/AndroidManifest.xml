@@ -50,11 +50,9 @@
         <activity
             android:name=".newChanges.activity.SignupActivity"
             android:exported="false" />
+
         <activity
-            android:name=".anotherSource.activitites.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".entireactivity.EntireMainActivity"
+            android:name=".newChanges.activity.MainActivity"
             android:exported="false" />
         <activity
             android:name=".newChanges.activity.HomeActivity"
@@ -83,7 +81,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".newChanges.activity.MainActivity"
+            android:name=".entireactivity.EntireMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

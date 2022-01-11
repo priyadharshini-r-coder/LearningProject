@@ -48,7 +48,7 @@ public class EntireMainActivity extends AppCompatActivity {
 
         binding.btnCustomer.setOnClickListener(v -> {
             Intent intent = new Intent(EntireMainActivity.this, CustomerLogin.class);
-          //  intent.putExtra(Constants.IntentTypes.ROLE,"Customer");
+           intent.putExtra(Constants.IntentTypes.ROLE,"Customer");
             startActivity(intent);
             finish();
         });
