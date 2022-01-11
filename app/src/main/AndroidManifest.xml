@@ -27,6 +27,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".driverapp.activity.TripHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".driverapp.activity.TripDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".driverapp.activity.TrackingActivity"
+            android:exported="false" />
+        <!--<activity
+            android:name=".driverapp.activity.LoginActivity"
+            android:exported="false" />-->
+        <activity
+            android:name=".driverapp.activity.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".driverapp.activity.CustomerCallActivity"
+            android:exported="false" />
+        <activity
             android:name=".newChanges.activity.DriverSettingsActivity"
             android:exported="false" />
         <activity
@@ -50,7 +68,6 @@
         <activity
             android:name=".newChanges.activity.SignupActivity"
             android:exported="false" />
-
         <activity
             android:name=".newChanges.activity.MainActivity"
             android:exported="false" />
@@ -81,7 +98,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".entireactivity.EntireMainActivity"
+            android:name=".driverapp.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,7 +108,7 @@
         </activity>
 
         <service
-            android:name=".entireactivity.service.MyFirebaseMessagingService"
+            android:name=".driverapp.service.firebaseMessaging"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
