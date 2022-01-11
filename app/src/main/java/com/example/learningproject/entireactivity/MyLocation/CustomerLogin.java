@@ -9,6 +9,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerLoginBinding;
+import com.example.learningproject.entireactivity.OtherLocation.DriverMapActivity;
+import com.example.learningproject.entireactivity.apiRetrofit.CommonUrl;
+import com.example.learningproject.entireactivity.model.SigningReport;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +44,7 @@ public class CustomerLogin extends AppCompatActivity {
         firebaseAuthListener = firebaseAuth -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if(user!=null){
-                Intent intent = new Intent(CustomerLogin.this, CustomerMap.class);
+                Intent intent = new Intent(CustomerLogin.this, DriverMapActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -53,13 +56,18 @@ public class CustomerLogin extends AppCompatActivity {
         binding.btnSignup.setOnClickListener(v -> {
             final String email = binding.etEmail.getText().toString();
             final String password = binding.etPassword.getText().toString();
+            SigningReport report= new SigningReport();
+            report.setEmail(email);
+            report.setPassword(password);
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(CustomerLogin.this, task -> {
                 if(!task.isSuccessful()){
                     Toast.makeText(CustomerLogin.this, "sign up error", Toast.LENGTH_SHORT).show();
                 }else{
                     String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
-                    current_user_db.setValue(true);
+
+                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference(CommonUrl.user_driver_tb1).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    current_user_db.setValue(report);
                 }
             });
         });

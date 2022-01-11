@@ -20,16 +20,11 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:met_singleLineEllipsis="true"
-            app:met_baseColor="@color/colorPrimary"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@color/colorPrimary"
             />
 
         <EditText
@@ -37,16 +32,11 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:text=""
-            android:textColor="@color/colorPrimary"
-            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:met_singleLineEllipsis="true"
-            app:met_baseColor="@color/colorPrimary"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@color/colorPrimary"
             />
 
 

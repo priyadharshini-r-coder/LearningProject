@@ -93,24 +93,24 @@ public class CustomerMap extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         destinationLatLng = new LatLng(0.0,0.0);
-
-        mDriverInfo = (LinearLayout) findViewById(R.id.driverInfo);
-
-        mDriverProfileImage = (ImageView) findViewById(R.id.driverProfileImage);
-
-        mDriverName = (TextView) findViewById(R.id.driverName);
-        mDriverPhone = (TextView) findViewById(R.id.driverPhone);
-        mDriverCar = (TextView) findViewById(R.id.driverCar);
-
-        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
-
-        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        mRadioGroup.check(R.id.UberX);
-
-        mLogout = (FloatingActionButton) findViewById(R.id.logout);
-        mRequest = (Button) findViewById(R.id.request);
-        mSettings =  findViewById(R.id.settings);
-        mHistory =  findViewById(R.id.history);
+//
+//        mDriverInfo = (LinearLayout) findViewById(R.id.driverInfo);
+//
+//        mDriverProfileImage = (ImageView) findViewById(R.id.driverProfileImage);
+//
+//        mDriverName = (TextView) findViewById(R.id.driverName);
+//        mDriverPhone = (TextView) findViewById(R.id.driverPhone);
+//        mDriverCar = (TextView) findViewById(R.id.driverCar);
+//
+//        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+//
+//        mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+//        mRadioGroup.check(R.id.UberX);
+//
+//        mLogout = (FloatingActionButton) findViewById(R.id.logout);
+//        mRequest = (Button) findViewById(R.id.request);
+//        mSettings =  findViewById(R.id.settings);
+//        mHistory =  findViewById(R.id.history);
 
         mLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,22 +177,22 @@ public class CustomerMap extends FragmentActivity implements OnMapReadyCallback 
 //                return;
             }
         });
-
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                destination = place.getName().toString();
-                destinationLatLng = place.getLatLng();
-            }
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-            }
-        });
+//
+//        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+//                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+//
+//        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+//            @Override
+//            public void onPlaceSelected(Place place) {
+//                // TODO: Get info about the selected place.
+//                destination = place.getName().toString();
+//                destinationLatLng = place.getLatLng();
+//            }
+//            @Override
+//            public void onError(Status status) {
+//                // TODO: Handle the error.
+//            }
+//        });
 
 
     }

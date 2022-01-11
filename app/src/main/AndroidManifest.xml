@@ -27,10 +27,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
-            android:name=".parsers.activity.MainActivity"
+            android:name=".newChanges.activity.DriverSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".parsers.activity.HomeActivity"
+            android:name=".newChanges.activity.UserSeatAvailability"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.CustomerSettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.DriverMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.SignUpDriver"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.SignUpCustomer"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.CustomerMapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".anotherSource.activitites.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".entireactivity.EntireMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".newChanges.activity.HomeActivity"
             android:exported="false" />
         <activity android:name=".entireactivity.OtherLocation.DriverLogin" />
         <activity android:name=".entireactivity.OtherLocation.DriverMapActivity" />
@@ -56,7 +83,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".entireactivity.EntireMainActivity"
+            android:name=".newChanges.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,8 +91,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".entireactivity.service.MyFirebaseMessagingService"
-            android:exported="false" >
+
+        <service
+            android:name=".entireactivity.service.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

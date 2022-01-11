@@ -1,11 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".parsers.activity.HomeActivity"
+    tools:context="com.example.learningproject.entireactivity.OtherLocation.DriverMapActivity"
+    tools:showIn="@layout/app_bar_home">
+
+    <fragment
+
+
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.user.uberuber.Welcome"
+        />
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <Switch
+                android:id="@+id/location_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Switch" />
+            <Button
+                android:id="@+id/btn_find_user"
+                android:layout_weight="7"
+                android:text="FIND USER"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".entireactivity.OtherLocation.DriverMapActivity"
     tools:showIn="@layout/app_bar_home">
 
 
@@ -33,19 +92,22 @@
             <ImageView
                 android:id="@+id/imgExpandable"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                android:src="@drawable/ic_keyboard_arrow_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <Button
-                android:layout_below="@+id/imgExpandable"
                 android:id="@+id/btnPickupRequest"
-                android:text="PICKUP REQUEST"
-                android:background="@drawable/btnsignin_bg_rounded_corner"
-                android:textColor="@android:color/white"
-                android:layout_margin="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgExpandable"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_sign_in_background"
+                android:text="PICKUP REQUEST"
+                android:textColor="@android:color/white" />
 
 
         </RelativeLayout>

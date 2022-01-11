@@ -33,6 +33,7 @@ import com.example.learningproject.newChanges.model.Rider;
 import com.example.learningproject.newChanges.model.Sender;
 import com.example.learningproject.newChanges.model.Token;
 import com.example.learningproject.newChanges.remote.IFCMService;
+import com.example.learningproject.newChanges.remote.IGoogleAPI;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
@@ -76,7 +77,7 @@ public class HomeActivity extends AppCompatActivity
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks ,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener
+        LocationListener,DirectionCallback
 
 {
 
@@ -114,7 +115,7 @@ public class HomeActivity extends AppCompatActivity
     private static final int LIMIT = 3;
 
     //Send Alert
-    IFCMService mService;
+    IGoogleAPI mService;
 
     //Presence System
     DatabaseReference driversAvailable;
@@ -143,7 +144,7 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        mService = CommonUrl.getFCMService();
+        mService = CommonUrl.getGoogleService();
 
 
 
@@ -167,10 +168,7 @@ public class HomeActivity extends AppCompatActivity
 
 
         //Init View
-        imgExpandable = (ImageView)findViewById(R.id.imgExpandable);
-
-
-        btnPickupRequest = (Button) findViewById(R.id.btnPickupRequest);
+        btnPickupRequest=findViewById(R.id.btnPickupRequest);
         btnPickupRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,8 +181,6 @@ public class HomeActivity extends AppCompatActivity
             }});
 
 
-        place_destination = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.place_destination);
-        place_location = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.place_location);
         typeFilter = new AutocompleteFilter.Builder()
                 .setTypeFilter(AutocompleteFilter.TYPE_FILTER_ADDRESS)
                 .setTypeFilter(3)
@@ -278,47 +274,47 @@ public class HomeActivity extends AppCompatActivity
 
 
     private void sendRequestToDriver(String driverId) {
-        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference(CommonUrl.token_tb1);
-
-        tokens.orderByKey().equalTo(driverId)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapShot:dataSnapshot.getChildren())
-                        {
-                            Token token = postSnapShot.getValue(Token.class);
-
-                            //Make raw payload convert LatLong to json
-                            String json_lat_lng = new Gson().toJson(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
-                          //  String riderToken = FirebaseInstanceId.getInstance().getToken();
-                            Notification data = new Notification(null, json_lat_lng); // send it to driver app and we will deserialize it again
-                            Sender content = new Sender(token.getToken(),data); //send this data to token
-
-                            mService.sendMessage(content)
-                                    .enqueue(new Callback<FCMResponse>() {
-                                        @Override
-                                        public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
-                                            if (response.body().success == 1)
-                                                Toast.makeText(HomeActivity.this ,"Request Sent!" , Toast.LENGTH_SHORT).show();
-                                            else
-                                                Toast.makeText(HomeActivity.this ,"Failed !" , Toast.LENGTH_SHORT).show();
-
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<FCMResponse> call, Throwable t) {
-                                            Log.e("Error" , t.getMessage());
-                                        }
-                                    });
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+//        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference(CommonUrl.token_tb1);
+//
+//        tokens.orderByKey().equalTo(driverId)
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot postSnapShot:dataSnapshot.getChildren())
+//                        {
+//                            Token token = postSnapShot.getValue(Token.class);
+//
+//                            //Make raw payload convert LatLong to json
+//                            String json_lat_lng = new Gson().toJson(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()));
+//                          //  String riderToken = FirebaseInstanceId.getInstance().getToken();
+//                            Notification data = new Notification(null, json_lat_lng); // send it to driver app and we will deserialize it again
+//                            Sender content = new Sender(token.getToken(),data); //send this data to token
+//
+//                            mService.sendMessage(content)
+//                                    .enqueue(new Callback<FCMResponse>() {
+//                                        @Override
+//                                        public void onResponse(Call<FCMResponse> call, Response<FCMResponse> response) {
+//                                            if (response.body().success == 1)
+//                                                Toast.makeText(HomeActivity.this ,"Request Sent!" , Toast.LENGTH_SHORT).show();
+//                                            else
+//                                                Toast.makeText(HomeActivity.this ,"Failed !" , Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onFailure(Call<FCMResponse> call, Throwable t) {
+//                                            Log.e("Error" , t.getMessage());
+//                                        }
+//                                    });
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
     }
 
@@ -797,4 +793,5 @@ public class HomeActivity extends AppCompatActivity
         mLastLocation = location;
         displayLocation();
     }
+
 }

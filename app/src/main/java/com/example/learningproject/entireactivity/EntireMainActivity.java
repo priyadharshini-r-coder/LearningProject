@@ -10,6 +10,7 @@ import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityEnitreMainBinding;
 import com.example.learningproject.entireactivity.MyLocation.CustomerLogin;
 import com.example.learningproject.entireactivity.OtherLocation.DriverLogin;
+import com.example.learningproject.entireactivity.apiRetrofit.CommonUrl;
 import com.example.learningproject.entireactivity.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +36,7 @@ public class EntireMainActivity extends AppCompatActivity {
     private void setDatabase() {
         mAuth = FirebaseAuth.getInstance();
         mDB = FirebaseDatabase.getInstance();
-        mUsers = mDB.getReference("Users");
+        mUsers = mDB.getReference(CommonUrl.user_driver_tb1);
     }
     private void setOnClicks() {
         binding.btnDriver.setOnClickListener(v -> {
@@ -47,7 +48,7 @@ public class EntireMainActivity extends AppCompatActivity {
 
         binding.btnCustomer.setOnClickListener(v -> {
             Intent intent = new Intent(EntireMainActivity.this, CustomerLogin.class);
-            intent.putExtra(Constants.IntentTypes.ROLE,"Customer");
+          //  intent.putExtra(Constants.IntentTypes.ROLE,"Customer");
             startActivity(intent);
             finish();
         });

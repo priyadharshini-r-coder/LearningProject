@@ -1,9 +1,11 @@
 package com.example.learningproject.entireactivity.apiRetrofit;
 
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-/*    private static Retrofit retrofit = null;
+    private static Retrofit retrofit = null;
 
     public static Retrofit getClient(String baseURL)
     {
@@ -15,5 +17,5 @@ public class RetrofitClient {
                     .build();
         }
         return retrofit;
-    }*/
+    }
 }
