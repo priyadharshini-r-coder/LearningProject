@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.learningproject">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -27,22 +28,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
-            android:name=".driverapp.activity.TripHistoryActivity"
+            android:name=".uberclone.activities.DriverLoginRegister"
             android:exported="false" />
         <activity
-            android:name=".driverapp.activity.TripDetailActivity"
+            android:name=".uberclone.activities.CustomerLoginRegister"
             android:exported="false" />
         <activity
-            android:name=".driverapp.activity.TrackingActivity"
-            android:exported="false" />
-        <!--<activity
-            android:name=".driverapp.activity.LoginActivity"
-            android:exported="false" />-->
-        <activity
-            android:name=".driverapp.activity.HomeActivity"
+            android:name=".uberclone.activities.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".driverapp.activity.CustomerCallActivity"
+            android:name=".uberclone.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".entireactivity.OtherLocation.TripDetail"
+            android:exported="false" />
+        <activity
+            android:name=".entireactivity.OtherLocation.DriverTracking"
             android:exported="false" />
         <activity
             android:name=".newChanges.activity.DriverSettingsActivity"
@@ -98,7 +105,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".driverapp.activity.LoginActivity"
+            android:name=".entireactivity.EntireMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -108,7 +115,7 @@
         </activity>
 
         <service
-            android:name=".driverapp.service.firebaseMessaging"
+            android:name=".entireactivity.service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

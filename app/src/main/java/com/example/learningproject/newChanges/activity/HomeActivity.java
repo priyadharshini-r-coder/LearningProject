@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity
 
 
         //Init View
-        btnPickupRequest=findViewById(R.id.btnPickupRequest);
+    /*    btnPickupRequest=findViewById(R.id.btnPickupRequest);
         btnPickupRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,7 +178,7 @@ public class HomeActivity extends AppCompatActivity
                 else
                     sendRequestToDriver(driverId);
 
-            }});
+            }});*/
 
 
         typeFilter = new AutocompleteFilter.Builder()
