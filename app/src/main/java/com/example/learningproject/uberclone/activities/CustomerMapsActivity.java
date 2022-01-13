@@ -1,30 +1,36 @@
 package com.example.learningproject.uberclone.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerMapsBinding;
-import com.example.learningproject.entireactivity.MyLocation.CustomerMap;
+import com.example.learningproject.databinding.ActivityDriverMapsBinding;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryDataEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,6 +64,8 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     private int radius=1;
     private boolean driverFound=false;
     private String driverFoundId;
+    FusedLocationProviderClient client;
+    LocationCallback callback;
 
 
     @Override
@@ -66,33 +74,47 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
 
         binding = ActivityCustomerMapsBinding.inflate(getLayoutInflater());
         userId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        callback=new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+            }
+        };
+
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customers Requset");
+        client=LocationServices.getFusedLocationProviderClient(this);
+
 
       driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        binding.logout.setOnClickListener(v -> {
-            auth.signOut();
-            logoutCustomer();
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                logoutCustomer();
+            }
         });
-        binding.callCab.setOnClickListener(v -> {
-            GeoFire geoFire=new GeoFire(customerDatabase);
-            geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
-            customerPickupLocation= new LatLng(lastLocation.getLatitude(),
-                    lastLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
-                    "PickUpCustomerHere"
-            ));
-            binding.callCab.setText("Getting your Driver");
-            getClosestDriverCab();
+        binding.callCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GeoFire geoFire=new GeoFire(customerDatabase);
+                geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
+                customerPickupLocation= new LatLng(lastLocation.getLatitude(),
+                        lastLocation.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
+                        "PickUpCustomerHere"
+                ));
+                binding.callCab.setText("Getting your Driver");
+                getClosestDriverCab();
 
+            }
         });
     }
 
@@ -145,7 +167,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
 
 
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         buildGoogleApiClient();
@@ -171,14 +193,30 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
                 }, 1);
             }
         }
-        mMap.setMyLocationEnabled(true);
+       // mMap.setMyLocationEnabled(true);
 
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode)
+        {
+            case 1:
+                if(grantResults.length>0  && grantResults [0]==PackageManager.PERMISSION_GRANTED )
+                {
+                    if(ContextCompat.checkSelfPermission(CustomerMapsActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)
+                    {
+                        client.requestLocationUpdates(locationRequest,callback, Looper.myLooper());
+                        mMap.setMyLocationEnabled(true);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(this,"Enable your Location",Toast.LENGTH_LONG).show();
+                }
+                break;
 
+        }
     }
 
     protected  synchronized void buildGoogleApiClient()
@@ -225,6 +263,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     @Override
     protected void onStop() {
         super.onStop();
+        finish();
 
     }
     private void logoutCustomer() {

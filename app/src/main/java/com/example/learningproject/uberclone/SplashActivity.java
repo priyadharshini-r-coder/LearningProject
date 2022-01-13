@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         com.example.learningproject.databinding.ActivitySplashBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
        Thread thread= new Thread(() -> {
            try{
-               sleep(70000);
+               sleep(7000);
            }catch(Exception e){
                e.printStackTrace();
            }

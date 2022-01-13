@@ -58,59 +58,6 @@
         <activity
             android:name=".uberclone.activities.WelcomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".entireactivity.EntireMainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".entireactivity.OtherLocation.TripDetail"
-            android:exported="false" />
-        <activity
-            android:name=".entireactivity.OtherLocation.DriverTracking"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.DriverSettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.UserSeatAvailability"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.CustomerSettingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.DriverMapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.SignUpDriver"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.SignUpCustomer"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.CustomerMapActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".newChanges.activity.HomeActivity"
-            android:exported="false" />
-        <activity android:name=".entireactivity.OtherLocation.DriverLogin" />
-        <activity android:name=".entireactivity.OtherLocation.DriverMapActivity" />
-        <activity
-            android:name=".entireactivity.MyLocation.CustomerMap"
-            android:exported="false" />
-        <activity
-            android:name=".entireactivity.MyLocation.CustomerLogin"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -126,13 +73,7 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".entireactivity.service.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+
     </application>
 
 </manifest>
