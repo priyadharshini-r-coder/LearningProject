@@ -1,9 +1,10 @@
-package com.example.learningproject.entireactivity.model;
+package com.example.learningproject.uberclone.model;
 
-public class LoginReport {
+public class User {
     private String email,password;
+    public User()
+    {
 
-    public LoginReport() {
     }
 
     public String getEmail() {
