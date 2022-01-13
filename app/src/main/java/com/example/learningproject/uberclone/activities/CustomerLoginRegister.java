@@ -1,9 +1,5 @@
 package com.example.learningproject.uberclone.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +7,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerLoginRegisterBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class CustomerLoginRegister extends AppCompatActivity {
@@ -40,27 +36,21 @@ public class CustomerLoginRegister extends AppCompatActivity {
             binding.button3.setVisibility(View.VISIBLE);
             binding.buttonLogins.setVisibility(View.INVISIBLE);
             binding.Account.setVisibility(View.INVISIBLE);
-            binding.CustomerTitle.setText("Customer Register");
+            binding.CustomerTitle.setText(getString(R.string.Customer_Reg));
             binding.button3.setEnabled(true);
         });
 
 
-        binding.button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email= binding.editTextemail.getText().toString();
-                String password= binding.editTextPassword.getText().toString();
-                 registerCustomer(email,password);
+        binding.button3.setOnClickListener(view -> {
+            String email= binding.editTextemail.getText().toString();
+            String password= binding.editTextPassword.getText().toString();
+             registerCustomer(email,password);
 
-            }
         });
-        binding.buttonLogins.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email= binding.editTextemail.getText().toString();
-                String password= binding.editTextPassword.getText().toString();
-                loginCustomer(email,password);
-            }
+        binding.buttonLogins.setOnClickListener(v -> {
+            String email= binding.editTextemail.getText().toString();
+            String password= binding.editTextPassword.getText().toString();
+            loginCustomer(email,password);
         });
 
     }
@@ -78,20 +68,16 @@ public class CustomerLoginRegister extends AppCompatActivity {
             progressDialog.setMessage("Please wait ,while we are checking your credentials...");
             progressDialog.show();
             mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(CustomerLoginRegister.this, "Customer Logged In Successful", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                                startActivity(new Intent(CustomerLoginRegister.this,CustomerMapsActivity.class));
-                            } else {
-                                Toast.makeText(CustomerLoginRegister.this, "Customer Login UnSuccessful,PLease try again", Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                                startActivity(new Intent(CustomerLoginRegister.this,WelcomeActivity.class));
-                            }
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(CustomerLoginRegister.this, "Customer Logged In Successful", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            startActivity(new Intent(CustomerLoginRegister.this,CustomerMapsActivity.class));
+                        } else {
+                            Toast.makeText(CustomerLoginRegister.this, "Customer Login UnSuccessful,PLease try again", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            startActivity(new Intent(CustomerLoginRegister.this,WelcomeActivity.class));
                         }
-
                     });
         }
     }
@@ -115,21 +101,18 @@ public class CustomerLoginRegister extends AppCompatActivity {
             progressDialog.show();
 
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(
-                    new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(CustomerLoginRegister.this,"Customer Registered Successful",Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                                startActivity(new Intent(CustomerLoginRegister.this,CustomerMapsActivity.class));
-                            }
-                            else
-                            {
-                                Toast.makeText(CustomerLoginRegister.this,"Customer Registered UnSuccessful,PLease try again",Toast.LENGTH_LONG).show();
-                                progressDialog.dismiss();
-                                startActivity(new Intent(CustomerLoginRegister.this,WelcomeActivity.class));
-                            }
+                    task -> {
+                        if(task.isSuccessful())
+                        {
+                            Toast.makeText(CustomerLoginRegister.this,"Customer Registered Successful",Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            startActivity(new Intent(CustomerLoginRegister.this,CustomerMapsActivity.class));
+                        }
+                        else
+                        {
+                            Toast.makeText(CustomerLoginRegister.this,"Customer Registered UnSuccessful,PLease try again",Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                            startActivity(new Intent(CustomerLoginRegister.this,WelcomeActivity.class));
                         }
                     }
             );

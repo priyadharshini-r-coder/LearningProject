@@ -4,10 +4,8 @@ import static java.lang.Thread.sleep;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.example.learningproject.R;
 import com.example.learningproject.uberclone.activities.WelcomeActivity;
 

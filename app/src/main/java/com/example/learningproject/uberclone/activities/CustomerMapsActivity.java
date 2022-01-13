@@ -1,20 +1,22 @@
 package com.example.learningproject.uberclone.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerMapsBinding;
-import com.example.learningproject.databinding.ActivityDriverMapsBinding;
+import com.example.learningproject.entireactivity.MyLocation.CustomerMap;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
@@ -74,28 +76,23 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                logoutCustomer();
-            }
+        binding.logout.setOnClickListener(v -> {
+            auth.signOut();
+            logoutCustomer();
         });
-        binding.callCab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GeoFire geoFire=new GeoFire(customerDatabase);
-                geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
-                customerPickupLocation= new LatLng(lastLocation.getLatitude(),
-                        lastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
-                        "PickUpCustomerHere"
-                ));
-                binding.callCab.setText("Getting your Driver");
-                getClosestDriverCab();
+        binding.callCab.setOnClickListener(v -> {
+            GeoFire geoFire=new GeoFire(customerDatabase);
+            geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
+            customerPickupLocation= new LatLng(lastLocation.getLatitude(),
+                    lastLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
+                    "PickUpCustomerHere"
+            ));
+            binding.callCab.setText("Getting your Driver");
+            getClosestDriverCab();
 
-            }
         });
     }
 
@@ -148,14 +145,39 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
         buildGoogleApiClient();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Need permission")
+                        .setMessage("Please grant permission.")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(CustomerMapsActivity.this, new String[]{
+                                        Manifest.permission.ACCESS_FINE_LOCATION
+                                }, 1);
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+            else {
+                ActivityCompat.requestPermissions(CustomerMapsActivity.this, new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                }, 1);
+            }
         }
         mMap.setMyLocationEnabled(true);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     }
 
