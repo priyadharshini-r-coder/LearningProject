@@ -37,6 +37,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,6 +45,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 public class CustomerMapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -60,12 +65,16 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     String userId;
     private  DatabaseReference customerDatabase;
     LatLng customerPickupLocation;
-    private DatabaseReference driverLocationRef;
+    private DatabaseReference driverAvailableRef;
     private int radius=1;
     private boolean driverFound=false;
     private String driverFoundId;
     FusedLocationProviderClient client;
     LocationCallback callback;
+    DatabaseReference driverLocationRef;
+    DatabaseReference driversRef;
+    private String customerId;
+    Marker driverMap;
 
 
     @Override
@@ -80,7 +89,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
                 super.onLocationResult(locationResult);
             }
         };
-
+        customerId=auth.getCurrentUser().getUid();
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
@@ -88,8 +97,8 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         client=LocationServices.getFusedLocationProviderClient(this);
 
 
-      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-
+      driverAvailableRef =FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+      driverLocationRef=FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -119,7 +128,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     }
 
     private void getClosestDriverCab() {
-        GeoFire geoFire=new GeoFire(driverLocationRef);
+        GeoFire geoFire=new GeoFire(driverAvailableRef);
         GeoQuery query=geoFire.queryAtLocation(new GeoLocation(customerPickupLocation.latitude
         ,customerPickupLocation.longitude),radius);
         query.removeAllListeners();
@@ -130,6 +139,14 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
              {
                  driverFound=true;
                  driverFoundId=dataSnapshot.getKey();
+                 driversRef =FirebaseDatabase.getInstance().getReference().child("Users")
+                         .child("Drivers").child(driverFoundId);
+                 HashMap driverMap=new HashMap();
+                 driverMap.put("CustomerRideId",customerId);
+                 driversRef.updateChildren(driverMap);
+                 gettingDriverLocation();
+                 binding.callCab.setText("Looking for Driver Location");
+
 
              }
             }
@@ -163,6 +180,39 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
 
             }
         });
+    }
+
+    private void gettingDriverLocation() {
+     driverLocationRef.child(driverFoundId).child("l")
+             .addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+                     if(snapshot.exists())
+                     {
+                         List<Object> driverLocationMap=(List<Object>) snapshot.getValue();
+                         double locationLat=0;
+                         double locationLng=0;
+                         binding.callCab.setText("Driver Found");
+                         if(driverLocationMap.get(0) !=null)
+                         {
+                             locationLat =Double.parseDouble(driverLocationMap.get(0).toString());
+
+                         }
+                         if(driverLocationMap.get(1) !=null)
+                         {
+                             locationLng =Double.parseDouble(driverLocationMap.get(1).toString());
+                         }
+                         LatLng driverLatLng=new LatLng(locationLat,locationLng);
+                         if(driverLatLng)
+                     }
+
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError error) {
+
+                 }
+             });
     }
 
 

@@ -58,6 +58,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 com.google.android.gms.location.LocationCallback callback;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
