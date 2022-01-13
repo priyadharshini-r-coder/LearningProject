@@ -113,7 +113,7 @@ public class FirebaseHelper {
         alertDialog.setMessage(activity.getResources().getString(R.string.fill_fields));
 
         LayoutInflater inflater=LayoutInflater.from(activity);
-        View registrer_layout=inflater.inflate(R.layout.layout_register, null);
+        View registrer_layout=inflater.inflate(R.layout.layout_register1, null);
         final MaterialEditText etEmail=registrer_layout.findViewById(R.id.etEmail);
         final MaterialEditText etPassword=registrer_layout.findViewById(R.id.etPassword);
         final MaterialEditText etName=registrer_layout.findViewById(R.id.etName);

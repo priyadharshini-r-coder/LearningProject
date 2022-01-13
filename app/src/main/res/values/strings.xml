@@ -117,4 +117,6 @@
     <string name="working">Working</string>
     <string name="pick_me_up">pick Me</string>
     <string name="waitting_for_pickup">Waiting for Pick up</string>
+    <string name="title_activity_driver_maps">DriverMapsActivity</string>
+    <string name="title_activity_customer_maps">CustomerMapsActivity</string>
 </resources>
