@@ -74,7 +74,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     DatabaseReference driverLocationRef;
     DatabaseReference driversRef;
     private String customerId;
-    Marker driverMap;
+    private Marker driverMarker;
 
 
     @Override
@@ -203,7 +203,25 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
                              locationLng =Double.parseDouble(driverLocationMap.get(1).toString());
                          }
                          LatLng driverLatLng=new LatLng(locationLat,locationLng);
-                         if(driverLatLng)
+                         if(driverMarker !=null)
+                         {
+                             driverMarker.remove();
+                         }
+
+                         //customer location
+                         Location location1=new Location("");
+                         location1.setLatitude(customerPickupLocation.latitude);
+                         location1.setLongitude(customerPickupLocation.longitude);
+                         //Driver location
+
+                         Location location2=new Location("");
+                         location2.setLatitude(driverLatLng.latitude);
+                         location2.setLongitude(driverLatLng.longitude);
+
+                          float distance=location1.distanceTo(location2);
+                          binding.callCab.setText("Driver Found"+String.valueOf(distance));
+                         driverMarker=mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Your Driver is here"));
+
                      }
 
                  }
