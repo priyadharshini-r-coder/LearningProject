@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityDriverMapsBinding;
+import com.example.learningproject.uberclone.utils.Constants;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.ConnectionResult;
@@ -150,6 +151,11 @@ private String driverId,customerId;
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+        binding.settings.setOnClickListener(view -> {
+            Intent intent= new Intent(DriverMapsActivity.this,SettingsActivity.class);
+            intent.putExtra(Constants.IntentRole.role,"Drivers");
+            startActivity(intent);
         });
     }
 

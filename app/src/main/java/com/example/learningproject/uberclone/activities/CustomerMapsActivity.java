@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerMapsBinding;
 import com.example.learningproject.databinding.ActivityDriverMapsBinding;
+import com.example.learningproject.uberclone.utils.Constants;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
@@ -113,6 +114,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         binding.callCab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 GeoFire geoFire=new GeoFire(customerDatabase);
                 geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
                 customerPickupLocation= new LatLng(lastLocation.getLatitude(),
@@ -125,6 +127,13 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
 
             }
         });
+
+        binding.settings.setOnClickListener(view -> {
+            Intent intent= new Intent(CustomerMapsActivity.this,SettingsActivity.class);
+            intent.putExtra(Constants.IntentRole.role,"Customers");
+            startActivity(intent);
+        });
+
     }
 
     private void getClosestDriverCab() {
