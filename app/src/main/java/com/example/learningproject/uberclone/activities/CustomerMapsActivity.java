@@ -269,8 +269,8 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     private void logoutCustomer() {
         Intent intent= new Intent(CustomerMapsActivity.this,WelcomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+         startActivity(intent);
 
-        finish();
 
     }
 }

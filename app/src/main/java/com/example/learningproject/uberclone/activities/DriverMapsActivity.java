@@ -218,7 +218,7 @@ com.google.android.gms.location.LocationCallback callback;
     private void logoutDriver() {
         Intent intent= new Intent(DriverMapsActivity.this,WelcomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
-        finish();
     }
 }

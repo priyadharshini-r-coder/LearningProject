@@ -140,6 +140,7 @@ public class CustomerLoginRegister extends AppCompatActivity {
                                 Toast.makeText(CustomerLoginRegister.this,"Customer Registered Successful",Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
                                 startActivity(new Intent(CustomerLoginRegister.this,CustomerMapsActivity.class));
+                                finish();
                             }
                             else
                             {
