@@ -61,8 +61,8 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     private  boolean currentLogoutDriverStatus=false;
     private FusedLocationProviderClient client;
 com.google.android.gms.location.LocationCallback callback;
-private DatabaseReference assignedCustomerRef,assignedCustomerPickUpRef;
-private String driverId,customerId;
+ private DatabaseReference assignedCustomerRef,assignedCustomerPickUpRef;
+ private String driverId,customerId="";
 
 
     @Override
@@ -256,16 +256,17 @@ private String driverId,customerId;
 
          DatabaseReference driversWorkingReference= FirebaseDatabase.getInstance().getReference().child("Drivers Working");
          GeoFire working= new GeoFire(driversWorkingReference);
-        /*switch (customerId)
+        switch (customerId)
          {
              case "":
              working.removeLocation(userId);
                  geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
+                 break;
              default:
                  geoFire.removeLocation(userId);
                  working.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-                 break;
-         }*/
+
+         }
      }
 
 

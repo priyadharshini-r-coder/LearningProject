@@ -67,7 +67,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     String userId;
     private  DatabaseReference customerDatabase;
     LatLng customerPickupLocation;
-    private DatabaseReference driverAvailableRef;
+   DatabaseReference driverAvailableRef;
     private int radius=1;
     private boolean driverFound=false;
     private String driverFoundId;
@@ -97,11 +97,11 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         user=auth.getCurrentUser();
         customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customers Request");
         client=LocationServices.getFusedLocationProviderClient(this);
-        customerId=auth.getCurrentUser().getUid();
+        customerId=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-      driverAvailableRef =FirebaseDatabase.getInstance().getReference().child("Drivers Working");
-      driverLocationRef=FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+      driverAvailableRef=FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -191,7 +191,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     }
 
     private void gettingDriverLocation() {
-     driverAvailableRef.child(driverFoundId).child("l")
+     driverLocationRef.child(driverFoundId).child("l")
              .addValueEventListener(new ValueEventListener() {
                  @Override
                  public void onDataChange(@NonNull DataSnapshot snapshot) {
