@@ -256,7 +256,7 @@ private String driverId,customerId;
 
          DatabaseReference driversWorkingReference= FirebaseDatabase.getInstance().getReference().child("Drivers Working");
          GeoFire working= new GeoFire(driversWorkingReference);
-        switch (customerId)
+        /*switch (customerId)
          {
              case "":
              working.removeLocation(userId);
@@ -265,7 +265,7 @@ private String driverId,customerId;
                  geoFire.removeLocation(userId);
                  working.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
                  break;
-         }
+         }*/
      }
 
 
