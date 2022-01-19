@@ -47,6 +47,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCallback
         , GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
@@ -88,15 +89,12 @@ private String driverId,customerId;
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentLogoutDriverStatus=true;
-                disconnectTheDriver();
-                auth.signOut();
-                logoutDriver();
+        binding.logout.setOnClickListener(v -> {
+            currentLogoutDriverStatus=true;
+            disconnectTheDriver();
+            auth.signOut();
+            logoutDriver();
 
-            }
         });
         getAssignedCustomerRequest();
     }
@@ -109,7 +107,7 @@ private String driverId,customerId;
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists())
                 {
-                   customerId=snapshot.getValue().toString();
+                   customerId= Objects.requireNonNull(snapshot.getValue()).toString();
                    getAssignedCustomerPickUpLocation();
                 }
             }
@@ -170,14 +168,9 @@ private String driverId,customerId;
                 new AlertDialog.Builder(this)
                         .setTitle("Need permission")
                         .setMessage("Please grant permission.")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{
-                                        Manifest.permission.ACCESS_FINE_LOCATION
-                                }, 1);
-                            }
-                        })
+                        .setPositiveButton("OK", (dialogInterface, i) -> ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                        }, 1))
                         .create()
                         .show();
             }
@@ -195,23 +188,15 @@ private String driverId,customerId;
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-       switch(requestCode)
-        {
-            case 1:
-                if(grantResults.length>0  && grantResults [0]==PackageManager.PERMISSION_GRANTED )
-                {
-                    if(ContextCompat.checkSelfPermission(DriverMapsActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED)
-                    {
-                       client.requestLocationUpdates(locationRequest,callback, Looper.myLooper());
-                        mMap.setMyLocationEnabled(true);
-                    }
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(DriverMapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    client.requestLocationUpdates(locationRequest, callback, Looper.myLooper());
+                    mMap.setMyLocationEnabled(true);
                 }
-                else
-                {
-                    Toast.makeText(this,"Enable your Location",Toast.LENGTH_LONG).show();
-                }
-                break;
-
+            } else {
+                Toast.makeText(this, "Enable your Location", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -249,23 +234,19 @@ private String driverId,customerId;
          LatLng latLng =new LatLng(location.getLatitude(),location.getLongitude());
          mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
          mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-         String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+         String userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
          DatabaseReference driverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 
          GeoFire geoFire=new GeoFire(driverAvailabilityRef);
 
          DatabaseReference driversWorkingReference= FirebaseDatabase.getInstance().getReference().child("Drivers Working");
          GeoFire working= new GeoFire(driversWorkingReference);
-         switch (customerId)
-         {
-             case "":
+         if (userId.equals(customerId)) {
              working.removeLocation(userId);
-                 geoFire.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-             default:
-                 geoFire.removeLocation(userId);
-                 working.setLocation(userId,new GeoLocation(location.getLatitude(),location.getLongitude()));
-                 break;
+             geoFire.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
          }
+         geoFire.removeLocation(userId);
+         working.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
      }
 
 
@@ -290,7 +271,7 @@ private String driverId,customerId;
     }
 
     private void disconnectTheDriver() {
-        String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         DatabaseReference driverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         GeoFire geoFire=new GeoFire(driverAvailabilityRef);
 

@@ -119,5 +119,8 @@
     <string name="waitting_for_pickup">Waiting for Pick up</string>
     <string name="title_activity_driver_maps">DriverMapsActivity</string>
     <string name="title_activity_customer_maps">CustomerMapsActivity</string>
-    <string name="Customer_Reg">Customer Register</string>
+
+    <string name="customer_register">Customer Register</string>
+    <string name="driver_Register">Driver Register</string>
+    <string name="driver_location">Looking for Driver Location</string>
 </resources>

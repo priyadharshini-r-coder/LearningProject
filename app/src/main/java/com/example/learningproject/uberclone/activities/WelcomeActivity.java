@@ -9,6 +9,7 @@ import com.example.learningproject.databinding.ActivityWelcomeBinding;
 
 public class WelcomeActivity extends AppCompatActivity {
      private ActivityWelcomeBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

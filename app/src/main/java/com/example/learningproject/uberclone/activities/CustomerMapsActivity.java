@@ -1,12 +1,5 @@
 package com.example.learningproject.uberclone.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,9 +10,15 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerMapsBinding;
-import com.example.learningproject.databinding.ActivityDriverMapsBinding;
 import com.example.learningproject.uberclone.utils.Constants;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -50,6 +49,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CustomerMapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -83,14 +83,14 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         super.onCreate(savedInstanceState);
 
         binding = ActivityCustomerMapsBinding.inflate(getLayoutInflater());
-        userId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         callback=new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
             }
         };
-        customerId=auth.getCurrentUser().getUid();
+        customerId= Objects.requireNonNull(auth.getCurrentUser()).getUid();
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
@@ -103,29 +103,24 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                logoutCustomer();
-            }
+        binding.logout.setOnClickListener(v -> {
+            auth.signOut();
+            logoutCustomer();
         });
-        binding.callCab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.callCab.setOnClickListener(v -> {
 
-                GeoFire geoFire=new GeoFire(customerDatabase);
-                geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
-                customerPickupLocation= new LatLng(lastLocation.getLatitude(),
-                        lastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
-                        "PickUpCustomerHere"
-                ));
-                binding.callCab.setText("Getting your Driver");
-                getClosestDriverCab();
+            GeoFire geoFire=new GeoFire(customerDatabase);
+            geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
+            customerPickupLocation= new LatLng(lastLocation.getLatitude(),
+                    lastLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
+                    "PickUpCustomerHere"
+            ));
+            binding.callCab.setText("Getting your Driver");
+            getClosestDriverCab();
 
-            }
         });
 
         binding.settings.setOnClickListener(view -> {
@@ -154,7 +149,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
                  driverMap.put("CustomerRideId",customerId);
                  driversRef.updateChildren(driverMap);
                  gettingDriverLocation();
-                 binding.callCab.setText("Looking for Driver Location");
+                 binding.callCab.setText(R.string.driver_location);
 
 
              }
