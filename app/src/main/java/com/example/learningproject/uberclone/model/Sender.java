@@ -2,9 +2,9 @@ package com.example.learningproject.uberclone.model;
 
 public class Sender {
     public String to;
-    public com.iramml.uberclone.riderapp.model.fcm.Notification notification;
+    public Notification notification;
 
-    public Sender(String to, com.iramml.uberclone.riderapp.model.fcm.Notification notification) {
+    public Sender(String to, Notification notification) {
         this.to = to;
         this.notification = notification;
     }
@@ -20,11 +20,11 @@ public class Sender {
         this.to = to;
     }
 
-    public com.iramml.uberclone.riderapp.model.fcm.Notification getNotification() {
+    public Notification getNotification() {
         return notification;
     }
 
-    public void setNotification(com.iramml.uberclone.riderapp.model.fcm.Notification notification) {
+    public void setNotification(Notification notification) {
         this.notification = notification;
     }
 }

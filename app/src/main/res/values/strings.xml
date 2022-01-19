@@ -123,4 +123,7 @@
     <string name="customer_register">Customer Register</string>
     <string name="driver_Register">Driver Register</string>
     <string name="driver_location">Looking for Driver Location</string>
+    <string name="driver_search">Getting your Driver</string>
+    <string name="driver_found">Driver Found</string>
+
 </resources>
