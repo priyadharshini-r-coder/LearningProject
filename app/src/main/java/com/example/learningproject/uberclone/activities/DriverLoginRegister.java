@@ -145,6 +145,8 @@ public class DriverLoginRegister extends AppCompatActivity {
                           {
                               Toast.makeText(DriverLoginRegister.this,"Driver Registered UnSuccessful,PLease try again",Toast.LENGTH_LONG).show();
                               progressDialog.dismiss();
+                              binding.buttonLogins.setVisibility(View.VISIBLE);
+                              binding.Account.setVisibility(View.VISIBLE);
                              // startActivity(new Intent(DriverLoginRegister.this,DriverMapsActivity.class));
                           }
                         }
