@@ -35,9 +35,9 @@ public class DriverLoginRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil .setContentView(this,R.layout.activity_driver_login_register);
         auth=FirebaseAuth.getInstance();
-        onlineDriverId=auth.getCurrentUser().getUid();
+       /* onlineDriverId=auth.getCurrentUser().getUid();
         driverDatabaseRef=FirebaseDatabase.getInstance().getReference()
-                .child("Users").child("Drivers").child(onlineDriverId);
+                .child("Users").child("Drivers").child(onlineDriverId);*/
         setOnClicks();
         progressDialog=new ProgressDialog(this);
     }
@@ -129,12 +129,12 @@ public class DriverLoginRegister extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                           if(task.isSuccessful())
                           {
-                              //onlineDriverId= auth.getCurrentUser().getUid();
+                              onlineDriverId= auth.getCurrentUser().getUid();
                               User user=new User();
                               user.setEmail(email);
                               user.setPassword(password);
-                            /*  driverDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Users")
-                                      .child("Drivers").child(onlineDriverId);*/
+                             driverDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Users")
+                                      .child("Drivers").child(onlineDriverId);
                               driverDatabaseRef.setValue(user);
                               startActivity(new Intent(DriverLoginRegister.this,DriverMapsActivity.class));
                               Toast.makeText(DriverLoginRegister.this,"Driver Registered Successful",Toast.LENGTH_LONG).show();

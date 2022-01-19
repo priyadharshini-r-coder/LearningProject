@@ -36,9 +36,8 @@ public class CustomerLoginRegister extends AppCompatActivity {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_customer_login_register);
         progressDialog=new ProgressDialog(this);
         mAuth=FirebaseAuth.getInstance();
-        onlineCustomerId=mAuth.getCurrentUser().getUid();
-        customerDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Users")
-                .child("Customers").child(onlineCustomerId);
+
+
 
        setOnClicks();
     }
@@ -131,11 +130,12 @@ public class CustomerLoginRegister extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
-
+                                onlineCustomerId= mAuth.getCurrentUser().getUid();
                                 User user=new User();
                                 user.setEmail(email);
                                 user.setPassword(password);
-
+                                customerDatabaseRef= FirebaseDatabase.getInstance().getReference().child("Users")
+                                        .child("Customers").child(onlineCustomerId);
 
                                 customerDatabaseRef.setValue(user);
 
