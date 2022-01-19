@@ -1,5 +1,12 @@
 package com.example.learningproject.uberclone.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,20 +17,15 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import com.example.learningproject.R;
 import com.example.learningproject.databinding.ActivityCustomerMapsBinding;
+import com.example.learningproject.databinding.ActivityDriverMapsBinding;
 import com.example.learningproject.uberclone.utils.Constants;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryDataEventListener;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -49,7 +51,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 
 public class CustomerMapsActivity extends FragmentActivity implements OnMapReadyCallback
@@ -83,44 +84,50 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         super.onCreate(savedInstanceState);
 
         binding = ActivityCustomerMapsBinding.inflate(getLayoutInflater());
-        userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        userId=FirebaseAuth.getInstance().getCurrentUser().getUid();
         callback=new LocationCallback() {
             @Override
             public void onLocationResult(@NonNull LocationResult locationResult) {
                 super.onLocationResult(locationResult);
             }
         };
-        customerId= Objects.requireNonNull(auth.getCurrentUser()).getUid();
+
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
-        customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customers Requset");
+        customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customers Request");
         client=LocationServices.getFusedLocationProviderClient(this);
+        customerId=auth.getCurrentUser().getUid();
 
 
-      driverAvailableRef =FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-      driverLocationRef=FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+      driverAvailableRef =FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+      driverLocationRef=FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        binding.logout.setOnClickListener(v -> {
-            auth.signOut();
-            logoutCustomer();
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                logoutCustomer();
+            }
         });
-        binding.callCab.setOnClickListener(v -> {
+        binding.callCab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            GeoFire geoFire=new GeoFire(customerDatabase);
-            geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
-            customerPickupLocation= new LatLng(lastLocation.getLatitude(),
-                    lastLocation.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
-                    "PickUpCustomerHere"
-            ));
-            binding.callCab.setText("Getting your Driver");
-            getClosestDriverCab();
+                GeoFire geoFire=new GeoFire(customerDatabase);
+                geoFire.setLocation(userId,new GeoLocation(lastLocation.getLatitude(),lastLocation.getLongitude()));
+                customerPickupLocation= new LatLng(lastLocation.getLatitude(),
+                        lastLocation.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(customerPickupLocation).title(
+                        "Pick Up Customer From Here"
+                ));
+                binding.callCab.setText("Getting your Driver");
+                getClosestDriverCab();
 
+            }
         });
 
         binding.settings.setOnClickListener(view -> {
@@ -132,62 +139,59 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     }
 
     private void getClosestDriverCab() {
-        GeoFire geoFire=new GeoFire(driverAvailableRef);
+        GeoFire geoFire=new GeoFire(driverLocationRef);
         GeoQuery query=geoFire.queryAtLocation(new GeoLocation(customerPickupLocation.latitude
         ,customerPickupLocation.longitude),radius);
         query.removeAllListeners();
-        query.addGeoQueryDataEventListener(new GeoQueryDataEventListener() {
+        query.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
-            public void onDataEntered(DataSnapshot dataSnapshot, GeoLocation location) {
-             if(!driverFound)
-             {
-                 driverFound=true;
-                 driverFoundId=dataSnapshot.getKey();
-                 driversRef =FirebaseDatabase.getInstance().getReference().child("Users")
-                         .child("Drivers").child(driverFoundId);
-                 HashMap driverMap=new HashMap();
-                 driverMap.put("CustomerRideId",customerId);
-                 driversRef.updateChildren(driverMap);
-                 gettingDriverLocation();
-                 binding.callCab.setText(R.string.driver_location);
+            public void onKeyEntered(String key, GeoLocation location) {
+                if(!driverFound)
+                {
+                    driverFound=true;
+                    driverFoundId=key;
+                    driversRef =FirebaseDatabase.getInstance().getReference().child("Users")
+                            .child("Drivers").child(driverFoundId);
+                    HashMap driverMap=new HashMap();
+                    driverMap.put("CustomerRideId",customerId);
+                    driversRef.updateChildren(driverMap);
+                    gettingDriverLocation();
+                    binding.callCab.setText("Looking for Driver Location");
 
 
-             }
+                }
             }
 
             @Override
-            public void onDataExited(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onDataMoved(DataSnapshot dataSnapshot, GeoLocation location) {
+            public void onKeyExited(String key) {
 
             }
 
             @Override
-            public void onDataChanged(DataSnapshot dataSnapshot, GeoLocation location) {
+            public void onKeyMoved(String key, GeoLocation location) {
 
             }
 
             @Override
             public void onGeoQueryReady() {
-              if(!driverFound)
-              {
-                  radius=radius+1;
-                  getClosestDriverCab();
-              }
+
             }
 
             @Override
             public void onGeoQueryError(DatabaseError error) {
-
+                if(!driverFound)
+                {
+                    radius=radius+100;
+                    getClosestDriverCab();
+                }
             }
         });
+
+
     }
 
     private void gettingDriverLocation() {
-     driverLocationRef.child(driverFoundId).child("l")
+     driverAvailableRef.child(driverFoundId).child("l")
              .addValueEventListener(new ValueEventListener() {
                  @Override
                  public void onDataChange(@NonNull DataSnapshot snapshot) {

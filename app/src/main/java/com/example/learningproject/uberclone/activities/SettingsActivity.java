@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.learningproject.R;
+
 import com.example.learningproject.databinding.ActivitySettingsBinding;
 import com.example.learningproject.uberclone.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
