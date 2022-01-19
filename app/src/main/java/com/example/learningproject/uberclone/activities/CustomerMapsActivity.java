@@ -139,12 +139,12 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
             intent.putExtra(Constants.IntentRole.role,"Customers");
             startActivity(intent);
         });
-        updateFirebaseToken();
+        //updateFirebaseToken();
 
     }
     private void updateFirebaseToken() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        final DatabaseReference tokens = db.getReference().child("Customer request").child("Token");
+        final DatabaseReference tokens = db.getReference().child("Customer Request").child("Token");
 
 
         FirebaseMessaging.getInstance().getToken()
