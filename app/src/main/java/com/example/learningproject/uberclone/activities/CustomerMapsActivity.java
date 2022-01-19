@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -41,6 +42,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +51,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.List;
@@ -95,13 +99,13 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         setContentView(binding.getRoot());
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
-        customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customers Request");
+        customerDatabase=FirebaseDatabase.getInstance().getReference().child("Customer Request");
         client=LocationServices.getFusedLocationProviderClient(this);
         customerId=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Working");
-      driverAvailableRef=FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Available");
+      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+      driverAvailableRef=FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -135,7 +139,26 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
             intent.putExtra(Constants.IntentRole.role,"Customers");
             startActivity(intent);
         });
+        updateFirebaseToken();
 
+    }
+    private void updateFirebaseToken() {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference tokens = db.getReference().child("Customer request").child("Token");
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("FIREBASE_TOKEN", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult();
+                        tokens.child(FirebaseAuth.getInstance().getUid()).setValue(token);
+                    }
+                });
     }
 
     private void getClosestDriverCab() {

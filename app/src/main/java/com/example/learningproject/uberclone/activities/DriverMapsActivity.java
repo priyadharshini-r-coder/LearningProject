@@ -250,11 +250,11 @@ com.google.android.gms.location.LocationCallback callback;
          mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
          mMap.animateCamera(CameraUpdateFactory.zoomTo(13));
          String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
-         DatabaseReference driverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Available");
+         DatabaseReference driverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 
          GeoFire geoFire=new GeoFire(driverAvailabilityRef);
 
-         DatabaseReference driversWorkingReference= FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Working");
+         DatabaseReference driversWorkingReference= FirebaseDatabase.getInstance().getReference().child("Drivers Working");
          GeoFire working= new GeoFire(driversWorkingReference);
         switch (customerId)
          {
