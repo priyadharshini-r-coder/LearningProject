@@ -100,8 +100,8 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
         customerId=FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Drivers Working");
-      driverAvailableRef=FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+      driverLocationRef =FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Working");
+      driverAvailableRef=FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -139,7 +139,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
     }
 
     private void getClosestDriverCab() {
-        GeoFire geoFire=new GeoFire(driverLocationRef);
+        GeoFire geoFire=new GeoFire(driverAvailableRef);
         GeoQuery query=geoFire.queryAtLocation(new GeoLocation(customerPickupLocation.latitude
         ,customerPickupLocation.longitude),radius);
         query.removeAllListeners();
@@ -181,7 +181,7 @@ public class CustomerMapsActivity extends FragmentActivity implements OnMapReady
             public void onGeoQueryError(DatabaseError error) {
                 if(!driverFound)
                 {
-                    radius=radius+100;
+                    radius=radius+1;
                     getClosestDriverCab();
                 }
             }
