@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:342918946596:android:44c753dcffd39842d05db1",
         "android_client_info": {
-          "package_name": "com.example.learningproject"
+          "package_name": "com.example.learningproject.debug"
         }
       },
       "oauth_client": [

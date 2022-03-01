@@ -80,7 +80,7 @@
 
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
-                            android:background="@color/transparent"
+
                             android:scaleType="centerCrop"
                             card_view:srcCompat="@drawable/road_location" />
 
@@ -99,15 +99,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/ripple"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:mrl_rippleColor="#d6d4d4"
-                                app:mrl_rippleHover="true"
-                                app:mrl_rippleFadeDuration="220"
-                                app:mrl_rippleDuration="450"
-                                android:padding="0dp">
+
 
                                 <Button
                                     android:id="@+id/myLocation1"
@@ -130,7 +122,7 @@
                                     android:visibility="visible" />
 
 
-                            </com.balysv.materialripple.MaterialRippleLayout>
+
 
                             <ImageView
                                 android:layout_margin="11dp"
@@ -141,7 +133,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerInParent="true"
                                 android:layout_centerVertical="true"
-                                android:background="@color/transparent"
+
                                 android:scaleType="fitCenter"
                                 card_view:srcCompat="@drawable/location__start" />
 
@@ -153,16 +145,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
-
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/ripple1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:mrl_rippleColor="#d6d4d4"
-                                app:mrl_rippleHover="true"
-                                app:mrl_rippleFadeDuration="220"
-                                app:mrl_rippleDuration="450"
-                                android:padding="0dp">
 
                                 <Button
                                     android:id="@+id/myLocation"
@@ -181,7 +163,7 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/nml_dv_txt" />
-                            </com.balysv.materialripple.MaterialRippleLayout>
+
 
                             <ImageView
                                 android:layout_width="24dp"
@@ -190,7 +172,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerInParent="true"
                                 android:layout_centerVertical="true"
-                                android:background="@color/transparent"
+
                                 android:scaleType="fitCenter"
                                 card_view:srcCompat="@drawable/location__end" />
                         </RelativeLayout>

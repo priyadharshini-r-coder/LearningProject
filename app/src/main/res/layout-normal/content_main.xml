@@ -82,17 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/ripple"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="0dp"
-                                app:mrl_rippleColor="#d6d4d4"
-                                app:mrl_rippleDuration="450"
-                                app:mrl_rippleFadeDuration="220"
-                                app:mrl_rippleHover="true"
 
-                                >
 
                                 <Button
                                     android:id="@+id/myCLocation1"
@@ -116,7 +106,7 @@
                                     android:visibility="visible"/>
 
 
-                            </com.balysv.materialripple.MaterialRippleLayout>
+
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -125,16 +115,7 @@
 
                                 >
 
-                                <com.github.vipulasri.timelineview.TimelineView
-                                    android:id="@+id/time_marker1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    app:line="@color/colorPrimary"
-                                    app:linePadding="5dp"
-                                    app:lineSize="1dp"
 
-
-                                    app:markerSize="10dp"/>
                             </RelativeLayout>
 
 
@@ -146,17 +127,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1">
 
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/ripple1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="0dp"
-                                app:mrl_rippleColor="#d6d4d4"
-                                app:mrl_rippleDuration="450"
-                                app:mrl_rippleFadeDuration="220"
-                                app:mrl_rippleHover="true"
-
-                                >
 
                                 <Button
                                     android:id="@+id/myCLocation"
@@ -175,25 +145,13 @@
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/nml_dv_txt"/>
-                            </com.balysv.materialripple.MaterialRippleLayout>
+
 
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="20dp">
 
-                                >
-
-                                <com.github.vipulasri.timelineview.TimelineView
-                                    android:id="@+id/time_marker"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    app:line="@color/colorPrimary"
-                                    app:linePadding="5dp"
-                                    app:lineSize="1dp"
-
-                                    app:marker="@color/colorRed"
-                                    app:markerSize="10dp"/>
                             </RelativeLayout>
 
                         </RelativeLayout>
