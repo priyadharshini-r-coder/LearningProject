@@ -23,6 +23,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".activities.test"
+            android:exported="false" />
+        <activity
+            android:name=".learning.MethodmeasuringTime"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activities.LocationServiceActivity"
             android:exported="false" />
         <activity

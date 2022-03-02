@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -22,7 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug{
+       /* debug{
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
         }
@@ -30,9 +31,9 @@ android {
 
             applicationIdSuffix ".beta"
             versionNameSuffix "-beta"
-        }
+        }*/
     }
-    productFlavors{
+  /*  productFlavors{
 
         free{
             applicationId "com.example.learningproject.free"
@@ -40,8 +41,8 @@ android {
 
         paid{
             applicationId "com.example.learningproject.paid"
-        }
-    }
+        }*//*
+    }*/
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -127,5 +128,6 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.facebook.android:facebook-login:4.40.0'
     implementation 'com.github.medyo:fancybuttons:1.9.1'
+
 
 }
