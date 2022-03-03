@@ -23,13 +23,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
-            android:name=".activities.SurfaceViewActivity"
+            android:name=".learning.MethodmeasuringTime"
             android:exported="false" />
         <activity
             android:name=".activities.test"
             android:exported="false" />
         <activity
-            android:name=".learning.MethodmeasuringTime"
+            android:name=".activities.SurfaceViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
