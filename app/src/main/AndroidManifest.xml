@@ -28,6 +28,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".uberclone.coroutines.seriesnetworkcall.SeriesNetworkCallsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uberclone.coroutines.parallelnetworkcall.ParallelNetworkCallsActivity"
+            android:exported="false" />
+        <activity
             android:name=".uberclone.activities.SettingsActivity"
             android:exported="false" />
         <!--
@@ -73,8 +79,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".uberclone.service.FirebaseMessagingService"
-            android:exported="false" >
+
+        <service
+            android:name=".uberclone.service.FirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

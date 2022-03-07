@@ -67,6 +67,8 @@
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_location_service.xml" value="0.2265625" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_main2.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_main_location.xml" value="0.2421875" />
+        <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_parallel_network_calls.xml" value="0.21302083333333333" />
+        <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_series_network_calls.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/activity_trip_detail.xml" value="0.10283687943262411" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/app_bar_autocomplete.xml" value="0.1640625" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/app_bar_drawer_home.xml" value="0.1" />
@@ -76,6 +78,7 @@
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/content_main.xml" value="0.1640625" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/fragment_history.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/item_layout.xml" value="0.15625" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/layout_change_pwd.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/layout_register.xml" value="0.1" />
         <entry key="..\:/Users/Indium Software/AndroidStudioProjects/LearningProject/app/src/main/res/layout/layout_register1.xml" value="0.2421875" />
