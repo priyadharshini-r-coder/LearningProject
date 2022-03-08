@@ -28,6 +28,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".uberclone.coroutines.longrunningtask.LongRunningTaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uberclone.coroutines.roomdb.RoomDbActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uberclone.coroutines.singlenetwork.SingleNetworkActivity"
+            android:exported="false" />
+        <activity
             android:name=".uberclone.coroutines.seriesnetworkcall.SeriesNetworkCallsActivity"
             android:exported="false" />
         <activity
