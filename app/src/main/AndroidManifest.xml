@@ -28,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".uberclone.coroutines.TwoLongRunningTask"
+            android:exported="false" />
+        <activity
             android:name=".uberclone.coroutines.longrunningtask.LongRunningTaskActivity"
             android:exported="false" />
         <activity
