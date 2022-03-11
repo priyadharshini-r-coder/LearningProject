@@ -21,12 +21,20 @@
     <uses-permission android:name="com.example.learningproject.permission.MAPS_RECEIVE" />
 
     <application
+        android:name=".uberclone.di.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        tools:replace="android:icon"
+        android:roundIcon="@drawable/ic_launcher_background"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
+        <activity
+            android:name=".uberclone.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".uberclone.activities.DialogActivity"
+            android:exported="false" />
         <activity
             android:name=".uberclone.coroutines.TwoLongRunningTask"
             android:exported="false" />
@@ -83,7 +91,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".uberclone.SplashActivity"
+            android:name=".uberclone.di.DependencyInjection"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

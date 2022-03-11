@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learningproject.R
 import com.example.learningproject.uberclone.coroutines.model.ApiUser
-import kotlinx.android.synthetic.main.item_layout.view.*
+
 
 class ApiUserAdapter (private val users:ArrayList<ApiUser>)
     : RecyclerView.Adapter<ApiUserAdapter.DataViewHolder>() {

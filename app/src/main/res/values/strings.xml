@@ -125,5 +125,6 @@
     <string name="driver_location">Looking for Driver Location</string>
     <string name="driver_search">Getting your Driver</string>
     <string name="driver_found">Driver Found</string>
+    <string name="value">This is a String we will Inject.</string>
 
 </resources>
