@@ -13,6 +13,10 @@
     <dimen name="spacing_xxlarge">50dp</dimen>
     <dimen name="spacing_xxxlarge">55dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="row_item_margin_vertical">12dp</dimen>
+    <dimen name="row_item_margin_horizontal">12dp</dimen>
+    <dimen name="task_size">20sp</dimen>
+    <dimen name="task_details_size">16sp</dimen>
     <!--<dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>

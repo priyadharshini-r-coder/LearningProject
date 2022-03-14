@@ -30,4 +30,12 @@
     <color name="colorRed">#d9534f</color>
 
 
+    <color name="greyAlpha">#55999999</color>
+    <color name="lightGreyAlpha">#55DDDDDD</color>
+
+    <color name="red">#FF5252</color>
+    <color name="yellow">#FFA000</color>
+    <color name="green">#8BC34A</color>
+
+
 </resources>

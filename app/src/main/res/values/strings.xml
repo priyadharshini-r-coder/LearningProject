@@ -89,6 +89,10 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="nav_home">nav</string>
     <string name="nav_history">Nav_history</string>
+    <string name="priority">Priority</string>
+    <string name="deadline">DeadLine</string>
+    <string name="show_completed">ShowCompleted</string>
+    <string name="priority_value">Priority value</string>
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
