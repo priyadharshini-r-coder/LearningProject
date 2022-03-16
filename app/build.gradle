@@ -5,6 +5,15 @@ plugins {
     id "com.google.protobuf" version "0.8.17"
 
 }
+tasks.register("hello")
+
+        {
+            dolast
+                    {
+                        println("Hello from" +project.parent.name)
+                    }
+
+        }
 
 android {
     compileSdk 31
