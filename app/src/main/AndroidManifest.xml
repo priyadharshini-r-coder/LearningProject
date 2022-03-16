@@ -24,16 +24,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
-            android:name=".activities.SurfaceViewActivity"
-            android:exported="false" />
+            android:name=".colorAPI.ColorpaletteAPI"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".learning.MethodmeasuringTime"
             android:exported="false" />
         <activity
+            android:name=".activities.SurfaceViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".datastore.TaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.test"
             android:exported="false" />
-
-
         <activity
             android:name=".activities.LocationServiceActivity"
             android:exported="false" />
@@ -62,7 +68,7 @@
             android:required="false" />
 
         <activity
-            android:name=".datastore.TaskActivity"
+            android:name=".protodatastore.TasksActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
