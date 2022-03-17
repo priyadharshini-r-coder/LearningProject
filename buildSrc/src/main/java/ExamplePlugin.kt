@@ -12,7 +12,7 @@ abstract  class ExamplePlugin:Plugin<Project> {
             )
          it.outputs.upToDateWhen { false }
         }
-        val androidComponents = p0.extensions.getByType(AndroidComponentsExtension::class.java)
+       /* val androidComponents = p0.extensions.getByType(AndroidComponentsExtension::class.java)
 
         androidComponents.onVariants { variant ->
 
@@ -30,7 +30,7 @@ abstract  class ExamplePlugin:Plugin<Project> {
                 it.apkFolder.set(variant.artifacts.get(SingleArtifact.APK))
                 it.builtArtifactsLoader.set(variant.artifacts.getBuiltArtifactsLoader())
             }
-        }
+        }*/
     }
 
 }

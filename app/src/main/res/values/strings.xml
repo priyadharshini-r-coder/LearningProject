@@ -93,6 +93,18 @@
     <string name="deadline">DeadLine</string>
     <string name="show_completed">ShowCompleted</string>
     <string name="priority_value">Priority value</string>
+    <string name="result">Result</string>
+    <string name="simple">Simple</string>
+    <string name="map">Map</string>
+    <string name="zip">Zip</string>
+    <string name="timer">Timer</string>
+    <string name="filter">Filter</string>
+    <string name="concat">ConCat</string>
+    <string name="merge">Merge</string>
+    <string name="delay">Delay</string>
+    <string name="operators">Operators</string>
+    <string name="search">Search</string>
+    <string name="doSomeWork">DoSomeWork</string>
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

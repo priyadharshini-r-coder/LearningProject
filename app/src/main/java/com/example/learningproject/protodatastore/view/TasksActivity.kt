@@ -1,4 +1,4 @@
-package com.example.learningproject.protodatastore
+package com.example.learningproject.protodatastore.view
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +13,7 @@ import com.example.learningproject.R
 import com.example.learningproject.databinding.ActivityTaskBinding
 
 import com.example.learningproject.datastore.TasksViewModelFactory
+import com.example.learningproject.protodatastore.*
 
 private const val USER_PREFERENCES_NAME = "user_preferences"
 private const val DATA_STORE_FILE_NAME = "user_prefs.pb"

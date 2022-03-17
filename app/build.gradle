@@ -151,6 +151,12 @@ dependencies {
     implementation "com.google.protobuf:protobuf-javalite:3.17.2"
 
 
+    //rxjava
+    // RxJava3 Dependencies
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+
 }
     protobuf {
         protoc {

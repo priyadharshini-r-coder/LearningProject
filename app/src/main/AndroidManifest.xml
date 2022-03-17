@@ -24,10 +24,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".rxjava.operators.SimpleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".protodatastore.view.TasksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.view.OperatorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.ZipActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.MapExampleActivity"
+            android:exported="false" />
+        <activity
             android:name=".colorAPI.ColorpaletteAPI"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".learning.MethodmeasuringTime"
             android:exported="false" />
@@ -68,7 +81,7 @@
             android:required="false" />
 
         <activity
-            android:name=".protodatastore.TasksActivity"
+            android:name=".rxjava.view.SelectionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
