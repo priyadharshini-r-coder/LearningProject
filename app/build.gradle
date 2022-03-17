@@ -5,6 +5,8 @@ plugins {
     id "com.google.protobuf" version "0.8.17"
 
 }
+//apply<ExamplePlugin>()
+/*
 tasks.register("hello")
 
         {
@@ -14,6 +16,8 @@ tasks.register("hello")
                     }
 
         }
+
+*/
 
 android {
     compileSdk 31
