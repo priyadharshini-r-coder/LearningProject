@@ -24,6 +24,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".rxjava.operators.IntervalOperator"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.FilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.MergeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.TimerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.ConcatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.DelayActivity"
+            android:exported="false" />
+        <activity
             android:name=".rxjava.operators.SimpleActivity"
             android:exported="false" />
         <activity

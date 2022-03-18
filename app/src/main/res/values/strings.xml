@@ -104,6 +104,7 @@
     <string name="delay">Delay</string>
     <string name="operators">Operators</string>
     <string name="search">Search</string>
+    <string name="doSomeWork">DoSomeWork</string>
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
