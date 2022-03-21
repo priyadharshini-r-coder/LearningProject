@@ -13,12 +13,12 @@ abstract  class GitversionTask: DefaultTask() {
 
 
         //this would be the code to get the tip of tree version
-      /*  val firstProcess=ProcessBuilder("git","rev-parse --short HEAD").start()
+        val firstProcess=ProcessBuilder("git","rev-parse --short HEAD").start()
         val error=firstProcess.errorStream.readBytes().toString()
         if(error.isNotBlank())
         {
             System.err.println("Git error :$error")
-        }*/
+        }
        // val gitVersion=firstProcess.inputStream.readBytes().toString()
         gitVersionOutputFile.get().asFile.writeText("1234")
     }

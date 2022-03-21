@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".rxjava.caching.CacheExampleActivity"
+            android:exported="false" />
+        <activity
             android:name=".rxjava.operators.IntervalOperator"
             android:exported="false" />
         <activity
