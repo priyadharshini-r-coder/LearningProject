@@ -28,6 +28,7 @@
 
     <color name="colorFont">#4a4a4a</color>
     <color name="colorRed">#d9534f</color>
-
+    <color name="separatorBackground">#AAAAAA</color>
+    <color name="separatorText">#FFFFFF</color>
 
 </resources>

@@ -89,6 +89,11 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="nav_home">nav</string>
     <string name="nav_history">Nav_history</string>
+    <string name="search_hint">Search Hint</string>
+    <string name="retry">Retry</string>
+    <string name="no_results">No Results</string>
+    <string name="unknown">\?</string>
+    <string name="language">Language: %s</string>
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
