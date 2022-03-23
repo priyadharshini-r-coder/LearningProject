@@ -9,10 +9,7 @@ import androidx.datastore.migrations.SharedPreferencesMigration
 import androidx.datastore.migrations.SharedPreferencesView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.learningproject.R
 import com.example.learningproject.databinding.ActivityTaskBinding
-
-import com.example.learningproject.datastore.TasksViewModelFactory
 
 private const val USER_PREFERENCES_NAME = "user_preferences"
 private const val DATA_STORE_FILE_NAME = "user_prefs.pb"

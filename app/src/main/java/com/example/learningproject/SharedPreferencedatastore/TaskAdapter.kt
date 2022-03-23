@@ -1,10 +1,9 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import android.view.ViewGroup
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 
 
 class TaskAdapter : ListAdapter<Task,TaskViewHolder>(TASKS_COMPARATOR){

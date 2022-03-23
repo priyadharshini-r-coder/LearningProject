@@ -1,4 +1,4 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import kotlinx.coroutines.flow.flowOf
 import java.text.SimpleDateFormat

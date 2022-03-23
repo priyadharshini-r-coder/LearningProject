@@ -1,4 +1,4 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

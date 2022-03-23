@@ -1,7 +1,6 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import android.content.Context
-
 
 
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,6 +75,9 @@ class UserPreferenceRepository private constructor(context: Context){
     }
 
     private fun updateSortOrder(sortOrder: SortOrder) {
+        /* sharedPreferences.edit()
+             putString(SORT_ORDER_KEY,sortOrder.name,"")
+         }*/
 
     }
 

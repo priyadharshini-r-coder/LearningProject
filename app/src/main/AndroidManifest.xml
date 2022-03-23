@@ -35,7 +35,7 @@
             android:name=".activities.SurfaceViewActivity"
             android:exported="false" />
         <activity
-            android:name=".datastore.TaskActivity"
+            android:name=".SharedPreferencedatastore.TaskActivity"
             android:exported="false" />
         <activity
             android:name=".activities.test"
@@ -68,7 +68,7 @@
             android:required="false" />
 
         <activity
-            android:name=".protodatastore.TasksActivity"
+            android:name=".preferncedatastore.ui.TaskActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

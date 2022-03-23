@@ -1,10 +1,9 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.learningproject.R
 import com.example.learningproject.databinding.ActivityTaskBinding
 
 class TaskActivity : AppCompatActivity() {

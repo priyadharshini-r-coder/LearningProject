@@ -1,4 +1,4 @@
-package com.example.learningproject.datastore
+package com.example.learningproject.SharedPreferencedatastore
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
