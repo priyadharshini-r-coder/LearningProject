@@ -8,7 +8,6 @@ import com.example.learningproject.databinding.ActivityAsyncBinding
 import com.example.learningproject.rxjava.utils.AppConstant
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.subjects.AsyncSubject
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class BehaviourSubjectActivity : AppCompatActivity() {

@@ -24,6 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
+            android:name=".rxjava.operators.DistinctActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.TakeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".rxjava.operators.SkipActivity"
+            android:exported="false" />
+        <activity
             android:name=".rxjava.caching.CacheExampleActivity"
             android:exported="false" />
         <activity
