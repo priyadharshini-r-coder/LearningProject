@@ -6,10 +6,12 @@ import android.util.Log
 
 import com.example.learningproject.databinding.ActivityAsyncBinding
 import com.example.learningproject.rxjava.utils.AppConstant
+import io.reactivex.rxjava3.core.Flowable.just
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
-import java.util.*
+
+
 
 class DistinctActivity : AppCompatActivity() {
     companion object{
@@ -30,11 +32,11 @@ class DistinctActivity : AppCompatActivity() {
         getObservable().distinct().subscribe(getObserver())
     }
 
-    private fun getObservable():Observable<Int>{
+    private fun getObservable(): Observable<Int> {
      return  Observable.just(1,2,1,1,2,3,4,6,4)
     }
 
-    private fun getObserver():Observer<Int>
+    private fun getObserver(): Observer<Int>
     {
         return object : Observer<Int>
         {
@@ -65,4 +67,3 @@ class DistinctActivity : AppCompatActivity() {
     }
 
 
-}
