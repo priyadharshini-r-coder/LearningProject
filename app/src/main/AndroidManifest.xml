@@ -14,7 +14,8 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.example.learningproject.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,13 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningProject">
         <activity
-            android:name=".learning.MethodmeasuringTime"
+            android:name=".flow.FlowActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.test"
-            android:exported="false" />
-        <activity
-            android:name=".activities.SurfaceViewActivity"
+            android:name=".workmanager.BlurActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +35,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".learning.MethodmeasuringTime"
+            android:exported="false" />
+        <activity
+            android:name=".activities.test"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SurfaceViewActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".activities.LocationServiceActivity"
             android:exported="false" />
