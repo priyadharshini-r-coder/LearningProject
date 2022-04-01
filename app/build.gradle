@@ -145,5 +145,7 @@ dependencies {
     // lifecycleScope
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
 
+    implementation 'com.google.android.exoplayer:exoplayer:2.16.1'
+
 }
 
